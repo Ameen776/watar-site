@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - فاتورة المياه</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #e94560;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .form-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #16213e;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #e94560;
+            box-shadow: 0 0 10px rgba(233,69,96,0.2);
+        }
+
+        /* ===== حساب المبلغ التلقائي ===== */
+        .calculation-box {
+            background: linear-gradient(135deg, #f4d03f, #d4af37);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            border: 2px solid #b8941f;
+        }
+
+        .calculation-box .calc-label {
+            font-size: 14px;
+            color: #1e3a5c;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .calculation-box .calc-result {
+            font-size: 28px;
+            color: #1e1e1e;
+            font-weight: 900;
+        }
+
+        .calculation-box .calc-detail {
+            font-size: 12px;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #e94560, #c73e54);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(233,69,96,0.4);
+        }
+
+        .records-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .records-section h2 {
+            color: #16213e;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .record-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-right: 4px solid #e94560;
+        }
+
+        .record-info {
+            flex: 1;
+        }
+
+        .record-info span {
+            display: inline-block;
+            margin-left: 15px;
+            color: #555;
+        }
+
+        .record-info strong {
+            color: #16213e;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+        }
+
+        .btn-view {
+            background: #0f3460;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-left: 5px;
+        }
+
+        .btn-view:hover {
+            background: #16213e;
+        }
+
+        .empty-msg {
+            text-align: center;
+            color: #888;
+            padding: 30px;
+        }
+
+        .btn-open-receipt {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #0f3460, #16213e);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-open-receipt:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(15,52,96,0.4);
+        }
+
+        .success-msg {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💧 لوحة تحكم فاتورة المياه</h1>
+        
+        <div class="form-card">
+            <div class="success-msg" id="successMsg">
+                ✅ تم إرسال البيانات بنجاح!
+            </div>
+            
+            <div class="form-group">
+                <label for="name">👤 اسم المستفيد:</label>
+                <input type="text" id="name" placeholder="أدخل اسم المستفيد..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="date">📅 التاريخ:</label>
+                <input type="date" id="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="day">📆 اليوم:</label>
+                <select id="day" required>
+                    <option value="">-- اختر اليوم --</option>
+                    <option value="الخميس">الخميس</option>
+                    <option value="الجمعة">الجمعة</option>
+                    <option value="السبت">السبت</option>
+                    <option value="الأحد">الأحد</option>
+                    <option value="الإثنين">الإثنين</option>
+                    <option value="الثلاثاء">الثلاثاء</option>
+                    <option value="الأربعاء">الأربعاء</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="responses">🔢 عدد الردود:</label>
+                <select id="responses" required onchange="calculateTotal()">
+                    <option value="">-- اختر عدد الردود --</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">💰 سعر الرد الواحد (ريال):</label>
+                <select id="amount" required onchange="calculateTotal()">
+                    <option value="">-- اختر السعر --</option>
+                    <option value="10">10 ريال</option>
+                    <option value="20">20 ريال</option>
+                    <option value="30">30 ريال</option>
+                    <option value="40">40 ريال</option>
+                    <option value="50">50 ريال</option>
+                    <option value="60">60 ريال</option>
+                </select>
+            </div>
+
+            <!-- ===== حساب المبلغ التلقائي ===== -->
+            <div class="calculation-box" id="calcBox" style="display: none;">
+                <div class="calc-label">💡 الحساب التلقائي:</div>
+                <div class="calc-result" id="calcResult">0 ريال</div>
+                <div class="calc-detail" id="calcDetail"></div>
+            </div>
+
+            <button class="btn-submit" onclick="sendData()">
+                📤 إرسال البيانات
+            </button>
+            
+            <a href="receipt.html" class="btn-open-receipt" target="_blank">
+                🧾 فتح صفحة الفاتورة
+            </a>
+        </div>
+
+        <div class="records-section">
+            <h2>📋 سجلات الفواتير المرسلة</h2>
+            <div id="recordsList">
+                <div class="empty-msg">لا توجد سجلات بعد</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('date').valueAsDate = new Date();
+
+        loadRecords();
+
+        // ===== حساب المبلغ التلقائي =====
+        function calculateTotal() {
+            const responses = parseInt(document.getElementById('responses').value) || 0;
+            const pricePerResponse = parseInt(document.getElementById('amount').value) || 0;
+            
+            const calcBox = document.getElementById('calcBox');
+            const calcResult = document.getElementById('calcResult');
+            const calcDetail = document.getElementById('calcDetail');
+            
+            if (responses > 0 && pricePerResponse > 0) {
+                const total = responses * pricePerResponse;
+                calcBox.style.display = 'block';
+                calcResult.textContent = total + ' ريال';
+                calcDetail.textContent = pricePerResponse + ' ريال × ' + responses + ' رد = ' + total + ' ريال';
+            } else {
+                calcBox.style.display = 'none';
+            }
+        }
+
+        function sendData() {
+            const name = document.getElementById('name').value.trim();
+            const date = document.getElementById('date').value;
+            const day = document.getElementById('day').value;
+            const responses = parseInt(document.getElementById('responses').value);
+            const pricePerResponse = parseInt(document.getElementById('amount').value);
+
+            if (!name || !date || !day || !responses || !pricePerResponse) {
+                alert('⚠️ يرجى ملء جميع الحقول');
+                return;
+            }
+
+            // ===== حساب المبلغ الإجمالي تلقائياً =====
+            const totalAmount = responses * pricePerResponse;
+
+            const record = {
+                id: Date.now(),
+                name: name,
+                date: date,
+                day: day,
+                responses: responses,
+                pricePerResponse: pricePerResponse,
+                amount: totalAmount, // المبلغ الإجمالي المحسوب تلقائياً
+                timestamp: new Date().toLocaleString('ar-SA')
+            };
+
+            let records = JSON.parse(localStorage.getItem('waterReceipts') || '[]');
+            records.push(record);
+            localStorage.setItem('waterReceipts', JSON.stringify(records));
+
+            const successMsg = document.getElementById('successMsg');
+            successMsg.style.display = 'block';
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 3000);
+
+            document.getElementById('name').value = '';
+            document.getElementById('day').value = '';
+            document.getElementById('responses').value = '';
+            document.getElementById('amount').value = '';
+            document.getElementById('date').valueAsDate = new Date();
+            document.getElementById('calcBox').style.display = 'none';
+
+            loadRecords();
+        }
+
+        function loadRecords() {
+            const records = JSON.parse(localStorage.getItem('waterReceipts') || '[]');
+            const list = document.getElementById('recordsList');
+
+            if (records.length === 0) {
+                list.innerHTML = '<div class="empty-msg">لا توجد سجلات بعد</div>';
+                return;
+            }
+
+            list.innerHTML = records.map(record => `
+                <div class="record-item">
+                    <div class="record-info">
+                        <strong>${record.name}</strong><br>
+                        <span>📅 ${record.date}</span>
+                        <span>📆 ${record.day}</span>
+                        <span>🔢 ${record.responses} رد</span>
+                        <span>💰 ${record.amount} ريال</span>
+                        <span style="color:#888; font-size:12px;">(${record.pricePerResponse}×${record.responses})</span>
+                    </div>
+                    <div>
+                        <button class="btn-view" onclick="viewReceipt(${record.id})">👁️ عرض</button>
+                        <button class="btn-delete" onclick="deleteRecord(${record.id})">🗑️ حذف</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function deleteRecord(id) {
+            if (!confirm('هل أنت متأكد من حذف هذا السجل؟')) return;
+            
+            let records = JSON.parse(localStorage.getItem('waterReceipts') || '[]');
+            records = records.filter(r => r.id !== id);
+            localStorage.setItem('waterReceipts', JSON.stringify(records));
+            loadRecords();
+        }
+
+        function viewReceipt(id) {
+            localStorage.setItem('currentReceiptId', id);
+            window.open('receipt.html', '_blank');
+        }
+    </script>
+</body>
+</html>
