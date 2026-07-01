@@ -2,12 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فاتورة تعبئة مياه</title>
-    
-    <!-- مكتبة html2pdf -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>نظام فواتير المياه</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600;700;800;900&display=swap');
 
@@ -19,52 +16,211 @@
 
         html, body {
             font-family: 'Noto Naskh Arabic', 'Segoe UI', Tahoma, sans-serif;
-            background: #5c3a1e;
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
         }
 
-        /* ===== زر تحميل PDF ===== */
-        .pdf-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            padding: 15px 30px;
-            background: linear-gradient(135deg, #e94560, #c73e54);
-            color: white;
+        /* ===== لوحة التحكم ===== */
+        #controlSection {
+            padding: 10px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #e94560;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .panel {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #16213e;
+            margin-bottom: 6px;
+            font-size: 1rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #e94560;
+            box-shadow: 0 0 10px rgba(233,69,96,0.2);
+        }
+
+        .calculation-box {
+            background: linear-gradient(135deg, #f4d03f, #d4af37);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            border: 2px solid #b8941f;
+            display: none;
+        }
+
+        .calculation-box .calc-label {
+            font-size: 14px;
+            color: #1e3a5c;
+            font-weight: 700;
+        }
+
+        .calculation-box .calc-result {
+            font-size: 28px;
+            color: #1e1e1e;
+            font-weight: 900;
+        }
+
+        .calculation-box .calc-detail {
+            font-size: 12px;
+            color: #555;
+        }
+
+        .btn-submit, .btn-view, .btn-pdf, .btn-back {
+            width: 100%;
+            padding: 15px;
             border: none;
-            border-radius: 50px;
-            font-size: 16px;
+            border-radius: 10px;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(233,69,96,0.4);
             transition: all 0.3s;
+            margin-top: 10px;
+            color: white;
         }
 
-        .pdf-btn:hover {
+        .btn-submit {
+            background: linear-gradient(135deg, #e94560, #c73e54);
+        }
+
+        .btn-view {
+            background: linear-gradient(135deg, #0f3460, #16213e);
+        }
+
+        .btn-pdf {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+        }
+
+        .btn-back {
+            background: linear-gradient(135deg, #6c757d, #495057);
+        }
+
+        .btn-submit:hover, .btn-view:hover, .btn-pdf:hover, .btn-back:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(233,69,96,0.6);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        .pdf-btn:active {
-            transform: scale(0.95);
+        .success-msg {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .records-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .records-section h2 {
+            color: #16213e;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .record-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-right: 4px solid #e94560;
+        }
+
+        .record-info span {
+            display: inline-block;
+            margin-left: 10px;
+            color: #555;
+            font-size: 13px;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .empty-msg {
+            text-align: center;
+            color: #888;
+            padding: 20px;
+        }
+
+        /* ===== الفاتورة - تملأ الشاشة بالكامل ===== */
+        #receiptSection {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #5c3a1e;
+            z-index: 9999;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 0;
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
         }
 
         .receipt-wrapper {
             width: 100%;
-            max-width: 600px;
-            height: 100vh;
+            max-width: 100%;
+            min-height: 100vh;
             background: linear-gradient(180deg, #6b4423 0%, #4a2e15 100%);
-            padding: 12px;
-            border-radius: 0;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            padding: 8px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
+            justify-content: flex-start;
         }
 
         .receipt-inner {
@@ -72,20 +228,18 @@
             border-radius: 4px;
             overflow: hidden;
             position: relative;
+            width: 100%;
             flex: 1;
-            display: flex;
-            flex-direction: column;
+            min-height: calc(100vh - 16px);
         }
 
-        /* ===== الشريط العلوي الزخرفي ===== */
         .top-banner {
-            height: 60px;
+            height: 70px;
             background: linear-gradient(180deg, #1e4a6e 0%, #0d2d4a 100%);
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
         }
 
         .flower-left, .flower-right {
@@ -96,22 +250,22 @@
             display: flex;
             align-items: center;
             gap: 3px;
-            padding: 0 8px;
+            padding: 0 10px;
         }
 
         .flower-left { left: 0; justify-content: flex-start; }
         .flower-right { right: 0; justify-content: flex-end; }
 
         .blue-flower {
-            width: 18px;
-            height: 18px;
+            width: 22px;
+            height: 22px;
             position: relative;
         }
 
         .blue-flower::before {
             content: '❀';
             color: #4a7fb5;
-            font-size: 16px;
+            font-size: 18px;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -124,58 +278,52 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
-            width: 52px;
-            height: 52px;
+            width: 60px;
+            height: 60px;
             background: linear-gradient(135deg, #c9a227, #a8841f);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid #f5f0e6;
+            border: 3px solid #f5f0e6;
             box-shadow: 0 3px 10px rgba(0,0,0,0.4);
         }
 
         .center-logo-inner {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: linear-gradient(180deg, #2a7ab8, #1a5a8a);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
         }
 
         .center-logo-inner::before {
             content: '💧';
-            font-size: 18px;
+            font-size: 22px;
             filter: brightness(1.5);
         }
 
-        /* ===== المحتوى الرئيسي ===== */
         .content {
-            padding: 10px 18px 0;
+            padding: 12px 20px 0;
             position: relative;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            min-height: calc(100vh - 70px);
         }
 
-        /* ===== شعار خدمة عملاء - صورة حقيقية ===== */
         .left-shield {
             position: absolute;
-            top: 10px;
-            left: 14px;
+            top: 12px;
+            left: 15px;
             text-align: center;
             z-index: 5;
         }
 
         .shield-icon {
-            width: 58px;
-            height: 68px;
+            width: 70px;
+            height: 80px;
             position: relative;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -188,122 +336,106 @@
         }
 
         .left-shield p {
-            font-size: 9px;
+            font-size: 10px;
             color: #1e4a6e;
             font-weight: bold;
-            line-height: 1.3;
-            margin-top: 2px;
+            line-height: 1.4;
         }
 
-        /* ===== صنبور المياه ===== */
         .faucet {
             position: absolute;
-            top: 10px;
-            right: 14px;
-            width: 48px;
-            height: 48px;
+            top: 12px;
+            right: 15px;
+            width: 55px;
+            height: 55px;
             background: linear-gradient(135deg, #c0c0c0, #a0a0a0);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 2px solid #c9a227;
-            font-size: 22px;
+            font-size: 26px;
             z-index: 5;
         }
 
-        /* ===== العنوان والمعلومات ===== */
         .header-info {
             text-align: center;
-            margin-top: 6px;
-            margin-bottom: 10px;
+            margin-top: 8px;
+            margin-bottom: 12px;
             padding-top: 6px;
         }
 
         .main-title {
             color: #b8941f;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 900;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
-            margin-bottom: 5px;
-            letter-spacing: 1px;
+            margin-bottom: 6px;
         }
 
         .project-location {
             color: #b8941f;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 700;
             margin-bottom: 4px;
         }
 
-        .date-line {
+        .date-line, .time-line {
             color: #1e4a6e;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 800;
             margin-bottom: 2px;
         }
 
-        .time-line {
-            color: #1e4a6e;
-            font-size: 15px;
-            font-weight: 800;
-        }
-
-        /* ===== الجدول - 5 أعمدة ===== */
         .data-table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            margin: 10px 0;
+            margin: 12px 0;
             border: 2px solid #b8941f;
             border-radius: 4px;
             overflow: hidden;
-            flex-shrink: 0;
         }
 
         .data-table th {
             background: linear-gradient(180deg, #b8941f, #9a7b1a);
             color: white;
-            padding: 8px 4px;
-            font-size: 12px;
+            padding: 12px 6px;
+            font-size: 14px;
             font-weight: 800;
             border: 1px solid #9a7b1a;
         }
 
         .data-table td {
             background: linear-gradient(180deg, #d4af37, #b8941f);
-            padding: 10px 3px;
+            padding: 14px 4px;
             text-align: center;
-            font-size: 12px;
+            font-size: 14px;
             color: #1e1e1e;
             font-weight: 700;
             border: 1px solid #c9a227;
-            text-shadow: 0 1px 1px rgba(255,255,255,0.3);
         }
 
-        /* ===== صناديق الملخص ===== */
         .summary-boxes {
             display: flex;
-            gap: 5px;
-            margin: 8px 0;
-            flex-shrink: 0;
+            gap: 6px;
+            margin: 10px 0;
         }
 
         .summary-box {
             flex: 1;
             background: linear-gradient(180deg, #f4d03f, #d4af37, #b8941f);
             border: 2px solid #8b6914;
-            border-radius: 5px;
-            padding: 10px 4px;
+            border-radius: 6px;
+            padding: 12px 6px;
             text-align: center;
             position: relative;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .summary-box .corner-dot {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: linear-gradient(135deg, #1e4a6e, #0d2d4a);
             border-radius: 50%;
             left: 50%;
@@ -311,8 +443,8 @@
             border: 1px solid #c9a227;
         }
 
-        .corner-top { top: -5px; }
-        .corner-bottom { bottom: -5px; }
+        .corner-top { top: -6px; }
+        .corner-bottom { bottom: -6px; }
 
         .summary-box .label {
             color: #1e3a5c;
@@ -320,42 +452,38 @@
             font-weight: 800;
             display: block;
             margin-bottom: 4px;
-            text-shadow: 0 1px 1px rgba(255,255,255,0.5);
         }
 
         .summary-box .value {
             color: #1e1e1e;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 900;
-            text-shadow: 0 1px 2px rgba(255,255,255,0.3);
         }
 
-        /* ===== قسم التواصل ===== */
         .contact-section {
             display: flex;
-            margin: 8px 0 0;
+            margin: 10px 0 0;
             border: 2px solid #b8941f;
-            border-radius: 5px;
+            border-radius: 6px;
             overflow: hidden;
-            flex-shrink: 0;
         }
 
         .contact-left {
-            width: 95px;
+            width: 110px;
             background: #f0ebe0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 10px 5px;
+            padding: 12px 6px;
             border-left: 2px solid #b8941f;
         }
 
         .al-harisi-logo {
-            width: 75px;
-            height: 75px;
+            width: 85px;
+            height: 85px;
             position: relative;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -369,14 +497,13 @@
         }
 
         .contact-left .name {
-            font-size: 17px;
+            font-size: 18px;
             color: #b8941f;
             font-weight: 900;
-            margin-top: 2px;
         }
 
         .contact-left .line {
-            width: 55px;
+            width: 60px;
             height: 2px;
             background: #b8941f;
             margin: 3px 0;
@@ -385,52 +512,49 @@
         .contact-right {
             flex: 1;
             background: linear-gradient(180deg, #c9a227, #a8841f);
-            padding: 12px 14px;
+            padding: 14px 16px;
             color: #1e1e1e;
         }
 
         .phone-line {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 900;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             text-align: center;
         }
 
         .note-title {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 900;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             text-align: center;
         }
 
         .note-text {
             font-size: 12px;
-            line-height: 1.5;
+            line-height: 1.6;
             text-align: center;
             font-weight: 700;
         }
 
-        /* ===== التذييل ===== */
         .footer {
             background: linear-gradient(180deg, #c9a227, #a8841f);
-            padding: 10px;
+            padding: 12px;
             text-align: center;
             color: #1e1e1e;
             font-size: 12px;
             font-weight: 800;
-            margin-top: 0;
-            flex-shrink: 0;
+            margin-top: 10px;
         }
 
-        /* ===== قلم الزينة ===== */
         .pen-decoration {
             position: absolute;
-            bottom: 6px;
-            left: -6px;
-            width: 26px;
-            height: 120px;
+            bottom: 10px;
+            left: -8px;
+            width: 30px;
+            height: 140px;
             background: linear-gradient(90deg, #0a0a0a 0%, #2a2a2a 25%, #0a0a0a 50%, #2a2a2a 75%, #0a0a0a 100%);
-            border-radius: 2px;
+            border-radius: 3px;
             transform: rotate(-15deg);
             z-index: 5;
             box-shadow: 2px 2px 8px rgba(0,0,0,0.5);
@@ -439,40 +563,39 @@
         .pen-decoration::before {
             content: '';
             position: absolute;
-            top: -10px;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 16px solid #d4af37;
+        }
+
+        .pen-decoration::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
             border-left: 5px solid transparent;
             border-right: 5px solid transparent;
-            border-top: 14px solid #d4af37;
-        }
-
-        .pen-decoration::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 4px solid transparent;
-            border-right: 4px solid transparent;
-            border-bottom: 8px solid #d4af37;
+            border-bottom: 10px solid #d4af37;
         }
 
         .pen-ring {
             position: absolute;
-            bottom: 35px;
-            left: -5px;
-            width: 24px;
-            height: 5px;
+            bottom: 40px;
+            left: -6px;
+            width: 26px;
+            height: 6px;
             background: linear-gradient(90deg, #d4af37, #b8941f, #d4af37);
-            border-radius: 2px;
+            border-radius: 3px;
             transform: rotate(-15deg);
             z-index: 6;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
         .watermark {
@@ -480,8 +603,8 @@
             top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80px;
-            height: 100px;
+            width: 100px;
+            height: 120px;
             opacity: 0.03;
             pointer-events: none;
             z-index: 1;
@@ -489,179 +612,377 @@
 
         .watermark::before {
             content: '💧';
-            font-size: 70px;
+            font-size: 80px;
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
         }
 
-        /* ===== إخفاء الزر عند الطباعة/PDF ===== */
+        .receipt-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding: 0 10px 15px;
+        }
+
+        .receipt-buttons button {
+            flex: 1;
+        }
+
         @media print {
-            .pdf-btn {
-                display: none !important;
-            }
-            body {
-                background: white;
-                overflow: visible;
-            }
-            .receipt-wrapper {
-                box-shadow: none;
-                padding: 0;
-                height: auto;
-            }
+            body { background: white; }
+            #controlSection { display: none !important; }
+            #receiptSection { display: block !important; position: static; }
+            .receipt-buttons { display: none !important; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
-    <!-- زر تحميل PDF -->
-    <button class="pdf-btn" onclick="downloadPDF()" title="تحميل الفاتورة كـ PDF">
-        📄 تحميل PDF
-    </button>
+    <!-- ===== قسم لوحة التحكم ===== -->
+    <div id="controlSection">
+        <div class="container">
+            <h1>💧 لوحة تحكم فاتورة المياه</h1>
 
-    <div class="receipt-wrapper" id="receipt">
-        <div class="receipt-inner">
-            <!-- الشريط العلوي -->
-            <div class="top-banner">
-                <div class="flower-left">
-                    <span class="blue-flower"></span>
-                    <span class="blue-flower"></span>
-                    <span class="blue-flower"></span>
-                    <span class="blue-flower"></span>
-                    <span class="blue-flower"></span>
+            <div class="panel">
+                <div class="success-msg" id="successMsg">✅ تم إرسال البيانات بنجاح!</div>
+
+                <div class="form-group">
+                    <label>👤 اسم المستفيد:</label>
+                    <input type="text" id="name" placeholder="أدخل اسم المستفيد...">
                 </div>
-                <div class="flower-right">
-                    <span class="blue-flower"></span>
-                    <span class="blue-flower"></span>
-                    <span class="blue-flower"></span>
-                    <span class="blue-flower"></span>
-                    <span class="blue-flower"></span>
+
+                <div class="form-group">
+                    <label>📅 التاريخ:</label>
+                    <input type="date" id="date">
                 </div>
-                <div class="center-logo">
-                    <div class="center-logo-inner"></div>
+
+                <div class="form-group">
+                    <label>📆 اليوم:</label>
+                    <select id="day">
+                        <option value="">-- اختر اليوم --</option>
+                        <option value="الخميس">الخميس</option>
+                        <option value="الجمعة">الجمعة</option>
+                        <option value="السبت">السبت</option>
+                        <option value="الأحد">الأحد</option>
+                        <option value="الإثنين">الإثنين</option>
+                        <option value="الثلاثاء">الثلاثاء</option>
+                        <option value="الأربعاء">الأربعاء</option>
+                    </select>
                 </div>
+
+                <div class="form-group">
+                    <label>🔢 عدد الردود:</label>
+                    <select id="responses" onchange="calculateTotal()">
+                        <option value="">-- اختر --</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>💰 سعر الرد (ريال):</label>
+                    <select id="price" onchange="calculateTotal()">
+                        <option value="">-- اختر --</option>
+                        <option value="10">10 ريال</option>
+                        <option value="20">20 ريال</option>
+                        <option value="30">30 ريال</option>
+                        <option value="40">40 ريال</option>
+                        <option value="50">50 ريال</option>
+                        <option value="60">60 ريال</option>
+                    </select>
+                </div>
+
+                <div class="calculation-box" id="calcBox">
+                    <div class="calc-label">💡 الحساب التلقائي:</div>
+                    <div class="calc-result" id="calcResult">0 ريال</div>
+                    <div class="calc-detail" id="calcDetail"></div>
+                </div>
+
+                <button class="btn-submit" onclick="sendData()">📤 إرسال البيانات</button>
+                <button class="btn-view" onclick="showReceipt()">🧾 عرض الفاتورة</button>
             </div>
 
-            <!-- المحتوى -->
-            <div class="content">
-                <!-- شعار خدمة عملاء -->
-                <div class="left-shield">
-                    <div class="shield-icon">
-                        <img src="https://i.ibb.co/RkfmfFjF/Screenshot.png" alt="شعار خدمة عملاء">
-                    </div>
-                    <p>خدمة عملاء<br>لتعبئة السيارات</p>
+            <div class="records-section">
+                <h2>📋 سجلات الفواتير</h2>
+                <div id="recordsList">
+                    <div class="empty-msg">لا توجد سجلات بعد</div>
                 </div>
-
-                <!-- صنبور المياه -->
-                <div class="faucet">🚰</div>
-
-                <!-- العنوان -->
-                <div class="header-info">
-                    <div class="main-title">إيصال تعبئة مياه</div>
-                    <div class="project-location">مكان المشروع: خط المزرق الصيابه</div>
-                    <div class="date-line" id="issueDate">تاريخ الإصدار: الثلاثاء 30 يونيو 2026</div>
-                    <div class="time-line" id="issueTime">الوقت: 11:14 م</div>
-                </div>
-
-                <!-- الجدول - 5 أعمدة -->
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>المستفيد</th>
-                            <th>التاريخ</th>
-                            <th>الردود</th>
-                            <th>المبلغ</th>
-                            <th>اليوم</th>
-                        </tr>
-                    </thead>
-                    <tbody id="receiptTableBody">
-                        <!-- يتم ملؤه تلقائياً -->
-                    </tbody>
-                </table>
-
-                <!-- صناديق الملخص -->
-                <div class="summary-boxes">
-                    <div class="summary-box">
-                        <span class="corner-dot corner-top"></span>
-                        <span class="corner-dot corner-bottom"></span>
-                        <span class="label">إجمالي الأيام:</span>
-                        <span class="value" id="totalDays">0</span>
-                    </div>
-                    <div class="summary-box">
-                        <span class="corner-dot corner-top"></span>
-                        <span class="corner-dot corner-bottom"></span>
-                        <span class="label">إجمالي الردود:</span>
-                        <span class="value" id="totalResponses">0</span>
-                    </div>
-                    <div class="summary-box">
-                        <span class="corner-dot corner-top"></span>
-                        <span class="corner-dot corner-bottom"></span>
-                        <span class="label">المبلغ:</span>
-                        <span class="value" id="totalAmount">0 ريال</span>
-                    </div>
-                </div>
-
-                <!-- قسم التواصل -->
-                <div class="contact-section">
-                    <div class="contact-left">
-                        <div class="al-harisi-logo">
-                            <img src="https://i.ibb.co/j9rVs5LL/Screenshot.png" alt="شعار الحريصي">
-                        </div>
-                        <div class="name">الحريصي</div>
-                        <div class="line"></div>
-                    </div>
-                    <div class="contact-right">
-                        <div class="phone-line">☎️ للتواصل تليفون: 0537024664</div>
-                        <div class="note-title">بيان توضيحي</div>
-                        <div class="note-text">
-                            يوضح قيمة المياه حسب المبلغ الموضح ويوضح تاريخ و وقت تقديم الخدمة.<br>
-                            مقدم الخدمة: عامل تعبئة.
-                        </div>
-                    </div>
-                </div>
-
-                <!-- التذييل -->
-                <div class="footer">
-                    This receipt is intended for proof of payment only.
-                </div>
-
-                <!-- قلم الزينة -->
-                <div class="pen-decoration"></div>
-                <div class="pen-ring"></div>
-
-                <!-- علامة مائية -->
-                <div class="watermark"></div>
             </div>
         </div>
     </div>
 
+    <!-- ===== قسم الفاتورة ===== -->
+    <div id="receiptSection">
+        <div class="receipt-wrapper" id="receipt">
+            <div class="receipt-inner">
+                <div class="top-banner">
+                    <div class="flower-left">
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                    </div>
+                    <div class="flower-right">
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                    </div>
+                    <div class="center-logo">
+                        <div class="center-logo-inner"></div>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="left-shield">
+                        <div class="shield-icon">
+                            <img src="https://i.ibb.co/RkfmfFjF/Screenshot.png" alt="شعار خدمة عملاء">
+                        </div>
+                        <p>خدمة عملاء<br>لتعبئة السيارات</p>
+                    </div>
+
+                    <div class="faucet">🚰</div>
+
+                    <div class="header-info">
+                        <div class="main-title">إيصال تعبئة مياه</div>
+                        <div class="project-location">مكان المشروع: خط المزرق الصيابه</div>
+                        <div class="date-line" id="issueDate">تاريخ الإصدار: --</div>
+                        <div class="time-line" id="issueTime">الوقت: --</div>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>المستفيد</th>
+                                <th>التاريخ</th>
+                                <th>الردود</th>
+                                <th>المبلغ</th>
+                                <th>اليوم</th>
+                            </tr>
+                        </thead>
+                        <tbody id="receiptTableBody">
+                            <tr><td colspan="5">لا توجد سجلات</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="summary-boxes">
+                        <div class="summary-box">
+                            <span class="corner-dot corner-top"></span>
+                            <span class="corner-dot corner-bottom"></span>
+                            <span class="label">إجمالي الأيام:</span>
+                            <span class="value" id="totalDays">0</span>
+                        </div>
+                        <div class="summary-box">
+                            <span class="corner-dot corner-top"></span>
+                            <span class="corner-dot corner-bottom"></span>
+                            <span class="label">إجمالي الردود:</span>
+                            <span class="value" id="totalResponses">0</span>
+                        </div>
+                        <div class="summary-box">
+                            <span class="corner-dot corner-top"></span>
+                            <span class="corner-dot corner-bottom"></span>
+                            <span class="label">المبلغ:</span>
+                            <span class="value" id="totalAmount">0 ريال</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-section">
+                        <div class="contact-left">
+                            <div class="al-harisi-logo">
+                                <img src="https://i.ibb.co/j9rVs5LL/Screenshot.png" alt="شعار الحريصي">
+                            </div>
+                            <div class="name">الحريصي</div>
+                            <div class="line"></div>
+                        </div>
+                        <div class="contact-right">
+                            <div class="phone-line">☎️ للتواصل تليفون: 0537024664</div>
+                            <div class="note-title">بيان توضيحي</div>
+                            <div class="note-text">
+                                يوضح قيمة المياه حسب المبلغ الموضح ويوضح تاريخ و وقت تقديم الخدمة.<br>
+                                مقدم الخدمة: عامل تعبئة.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="footer">
+                        This receipt is intended for proof of payment only.
+                    </div>
+
+                    <div class="pen-decoration"></div>
+                    <div class="pen-ring"></div>
+                    <div class="watermark"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="receipt-buttons">
+            <button class="btn-pdf" onclick="downloadPDF()">📄 تحميل PDF</button>
+            <button class="btn-back" onclick="hideReceipt()">🔙 رجوع</button>
+        </div>
+    </div>
+
     <script>
-        // ===== دالة تحميل PDF =====
-        function downloadPDF() {
-            const element = document.getElementById('receipt');
-            const btn = document.querySelector('.pdf-btn');
-            
-            // إخفاء الزر مؤقتاً
-            btn.style.display = 'none';
-            
-            const opt = {
-                margin: 0,
-                filename: 'فاتورة-المياه-' + new Date().toLocaleDateString('ar-SA') + '.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { 
-                    scale: 2,
-                    useCORS: true,
-                    logging: false
-                },
-                jsPDF: { 
-                    unit: 'mm', 
-                    format: 'a4', 
-                    orientation: 'portrait'
-                }
+        document.getElementById('date').valueAsDate = new Date();
+
+        function calculateTotal() {
+            const responses = parseInt(document.getElementById('responses').value) || 0;
+            const price = parseInt(document.getElementById('price').value) || 0;
+            const box = document.getElementById('calcBox');
+            const result = document.getElementById('calcResult');
+            const detail = document.getElementById('calcDetail');
+
+            if (responses > 0 && price > 0) {
+                const total = responses * price;
+                box.style.display = 'block';
+                result.textContent = total + ' ريال';
+                detail.textContent = price + ' × ' + responses + ' = ' + total + ' ريال';
+            } else {
+                box.style.display = 'none';
+            }
+        }
+
+        function sendData() {
+            const name = document.getElementById('name').value.trim();
+            const date = document.getElementById('date').value;
+            const day = document.getElementById('day').value;
+            const responses = parseInt(document.getElementById('responses').value);
+            const price = parseInt(document.getElementById('price').value);
+
+            if (!name || !date || !day || !responses || !price) {
+                alert('⚠️ يرجى ملء جميع الحقول');
+                return;
+            }
+
+            const totalAmount = responses * price;
+            const record = {
+                id: Date.now(),
+                name, date, day, responses, pricePerResponse: price, amount: totalAmount,
+                timestamp: new Date().toLocaleString('ar-SA')
             };
 
-            // إنشاء PDF
+            let records = JSON.parse(localStorage.getItem('waterReceipts') || '[]');
+            records.push(record);
+            localStorage.setItem('waterReceipts', JSON.stringify(records));
+
+            document.getElementById('successMsg').style.display = 'block';
+            setTimeout(() => document.getElementById('successMsg').style.display = 'none', 3000);
+
+            document.getElementById('name').value = '';
+            document.getElementById('day').value = '';
+            document.getElementById('responses').value = '';
+            document.getElementById('price').value = '';
+            document.getElementById('date').valueAsDate = new Date();
+            document.getElementById('calcBox').style.display = 'none';
+
+            loadRecords();
+        }
+
+        function loadRecords() {
+            const records = JSON.parse(localStorage.getItem('waterReceipts') || '[]');
+            const list = document.getElementById('recordsList');
+
+            if (records.length === 0) {
+                list.innerHTML = '<div class="empty-msg">لا توجد سجلات بعد</div>';
+                return;
+            }
+
+            list.innerHTML = records.map(r => `
+                <div class="record-item">
+                    <div class="record-info">
+                        <strong>${r.name}</strong><br>
+                        <span>📅 ${r.date}</span>
+                        <span>🔢 ${r.responses} رد</span>
+                        <span>💰 ${r.amount} ريال</span>
+                    </div>
+                    <button class="btn-delete" onclick="deleteRecord(${r.id})">🗑️ حذف</button>
+                </div>
+            `).join('');
+        }
+
+        function deleteRecord(id) {
+            if (!confirm('هل أنت متأكد؟')) return;
+            let records = JSON.parse(localStorage.getItem('waterReceipts') || '[]');
+            records = records.filter(r => r.id !== id);
+            localStorage.setItem('waterReceipts', JSON.stringify(records));
+            loadRecords();
+        }
+
+        function showReceipt() {
+            updateReceiptData();
+            document.getElementById('controlSection').style.display = 'none';
+            document.getElementById('receiptSection').style.display = 'block';
+            document.body.style.background = '#5c3a1e';
+            window.scrollTo(0, 0);
+        }
+
+        function hideReceipt() {
+            document.getElementById('receiptSection').style.display = 'none';
+            document.getElementById('controlSection').style.display = 'block';
+            document.body.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)';
+        }
+
+        function updateReceiptData() {
+            const records = JSON.parse(localStorage.getItem('waterReceipts') || '[]');
+            const tbody = document.getElementById('receiptTableBody');
+
+            const now = new Date();
+            document.getElementById('issueTime').textContent = 'الوقت: ' + now.toLocaleTimeString('ar-SA', {hour:'2-digit', minute:'2-digit'});
+            document.getElementById('issueDate').textContent = 'تاريخ الإصدار: ' + now.toLocaleDateString('ar-SA', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+
+            if (records.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5">لا توجد سجلات</td></tr>';
+            } else {
+                tbody.innerHTML = records.map(r => `
+                    <tr>
+                        <td>${r.name}</td>
+                        <td>${r.date}</td>
+                        <td>${r.responses}</td>
+                        <td>${r.amount} ريال</td>
+                        <td>${r.day}</td>
+                    </tr>
+                `).join('');
+            }
+
+            const uniqueDates = new Set(records.map(r => r.date));
+            document.getElementById('totalDays').textContent = uniqueDates.size;
+            document.getElementById('totalResponses').textContent = records.reduce((s, r) => s + r.responses, 0);
+            document.getElementById('totalAmount').textContent = records.reduce((s, r) => s + r.amount, 0) + ' ريال';
+        }
+
+        function downloadPDF() {
+            const element = document.getElementById('receipt');
+            const buttons = document.querySelector('.receipt-buttons');
+            buttons.style.display = 'none';
+
+            const opt = {
+                margin: 0,
+                filename: 'فاتورة-المياه-' + new Date().toLocaleDateString('ar-SA').replace(/\//g, '-') + '.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
             html2pdf().set(opt).from(element).save().then(() => {
-                // إعادة إظهار الزر بعد الانتهاء
-                btn.style.display = 'block';
-           
+                buttons.style.display = 'flex';
+            }).catch(() => {
+                buttons.style.display = 'flex';
+                alert('حدث خطأ');
+            });
+        }
+
+        loadRecords();
+    </script>
+</body>
+</html>
