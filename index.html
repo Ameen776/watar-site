@@ -251,7 +251,7 @@
 
         /* ===== البانر العلوي ===== */
         .top-banner {
-            height: 80px;
+            height: 85px;
             background: linear-gradient(180deg, #1a4a6e 0%, #0d2d4a 100%);
             position: relative;
             display: flex;
@@ -259,56 +259,103 @@
             justify-content: center;
         }
 
-        /* الشعار في الزاوية اليسرى العليا - الجديد */
+        /* ===== الشعارات في الزوايا العلوية ===== */
+
+        /* الشعار الأيسر: خدمة عملاء لتعبئة السيارات */
         .top-left-logo {
             position: absolute;
             top: 50%;
             left: 12px;
             transform: translateY(-50%);
-            z-index: 10;
-            width: 60px;
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .top-left-logo .shield-icon {
+            width: 55px;
             height: 60px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid #f5f0e6;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 3px;
+            border: 2px solid #f5f0e6;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
-        .top-left-logo img {
+        .top-left-logo .shield-icon img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
 
-        /* الشعار في الزاوية اليمنى العليا - الجديد (بدل الزهور) */
+        .top-left-logo p {
+            font-size: 11px;
+            color: #f5f0e6;
+            font-weight: 900;
+            line-height: 1.3;
+            text-align: center;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            margin: 0;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* الشعار الأيمن: رمز المياه مع الصورة */
         .top-right-logo {
             position: absolute;
             top: 50%;
             right: 12px;
             transform: translateY(-50%);
-            z-index: 10;
-            width: 60px;
-            height: 60px;
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .top-right-logo .water-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #d0d0d0, #a0a0a0);
             border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid #f5f0e6;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 3px solid #d4af37;
+            font-size: 28px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
         }
 
-        .top-right-logo img {
+        .top-right-logo .water-icon img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 50%;
         }
 
+        .top-right-logo .water-icon .faucet-emoji {
+            font-size: 28px;
+        }
+
+        .top-right-logo p {
+            font-size: 10px;
+            color: #f5f0e6;
+            font-weight: 900;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            margin: 0;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* الشعار المركزي */
         .center-logo {
             position: absolute;
             top: 50%;
@@ -342,20 +389,14 @@
             filter: brightness(1.5);
         }
 
-        /* إزالة الزهور القديمة */
-        .flower-left,
-        .flower-right {
-            display: none;
-        }
-
         /* ===== المحتوى ===== */
         .content {
             padding: 12px 22px 10px;
             position: relative;
-            min-height: calc(287mm - 80px);
+            min-height: calc(287mm - 85px);
         }
 
-        /* ===== الشعار الأيسر - خدمة عملاء لتعبئة السيارات ===== */
+        /* ===== الشعار الأيسر الداخلي ===== */
         .left-shield {
             position: absolute;
             top: 12px;
@@ -364,7 +405,7 @@
             z-index: 5;
         }
 
-        .shield-icon {
+        .left-shield .shield-icon {
             width: 85px;
             height: 95px;
             position: relative;
@@ -374,7 +415,7 @@
             justify-content: center;
         }
 
-        .shield-icon img {
+        .left-shield .shield-icon img {
             width: 100%;
             height: 100%;
             object-fit: contain;
@@ -388,7 +429,7 @@
             margin: 0;
         }
 
-        /* ===== الشعار الأيمن - رمز المياه ===== */
+        /* ===== الشعار الأيمن الداخلي ===== */
         .faucet {
             position: absolute;
             top: 12px;
@@ -438,7 +479,7 @@
             margin-bottom: 2px;
         }
 
-        /* ===== الجدول - خطوط كبيرة وواضحة ===== */
+        /* ===== الجدول ===== */
         .data-table {
             width: 100%;
             border-collapse: separate;
@@ -538,7 +579,6 @@
             border-left: 3px solid #b8941f;
         }
 
-        /* شعار الحريصي الجديد - تحت اسم الحريصي */
         .harisi-logo {
             width: 90px;
             height: 90px;
@@ -599,7 +639,7 @@
             font-weight: 700;
         }
 
-        /* ===== التذييل - السطر الإنجليزي ===== */
+        /* ===== التذييل ===== */
         .footer {
             background: linear-gradient(180deg, #c9a227, #a8841f);
             padding: 18px;
@@ -810,18 +850,23 @@
                 right: 8px;
             }
 
-            .top-left-logo,
-            .top-right-logo {
-                width: 40px;
+            .top-left-logo .shield-icon {
+                width: 35px;
                 height: 40px;
             }
 
-            .top-left-logo {
-                left: 8px;
+            .top-left-logo p {
+                font-size: 8px;
             }
 
-            .top-right-logo {
-                right: 8px;
+            .top-right-logo .water-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+
+            .top-right-logo p {
+                font-size: 8px;
             }
 
             .pen-decoration,
@@ -830,7 +875,7 @@
             }
 
             .top-banner {
-                height: 60px;
+                height: 65px;
             }
 
             .center-logo {
@@ -1001,31 +1046,38 @@
             <div class="receipt-inner">
                 <!-- البانر العلوي -->
                 <div class="top-banner">
-                    <!-- الشعار الجديد في الزاوية اليسرى -->
+                    <!-- الشعار الأيسر: خدمة عملاء لتعبئة السيارات -->
                     <div class="top-left-logo">
-                        <img src="https://i.ibb.co/ksWSDR71/1782980542890.png" alt="شعار الزاوية اليسرى">
+                        <div class="shield-icon">
+                            <img src="https://i.ibb.co/RkfmfFjF/Screenshot.png" alt="خدمة عملاء">
+                        </div>
+                        <p>خدمة عملاء<br>لتعبئة السيارات</p>
                     </div>
 
-                    <!-- الشعار الجديد في الزاوية اليمنى (بدل الزهور) -->
+                    <!-- الشعار الأيمن: رمز المياه مع الصورة -->
                     <div class="top-right-logo">
-                        <img src="https://i.ibb.co/pBLypmxZ/1782979766389.jpg" alt="شعار الزاوية اليمنى">
+                        <div class="water-icon">
+                            <img src="https://i.ibb.co/pBLypmxZ/1782979766389.jpg" alt="شعار المياه">
+                        </div>
+                        <p>تعبئة مياه</p>
                     </div>
 
+                    <!-- الشعار المركزي -->
                     <div class="center-logo">
                         <div class="center-logo-inner"></div>
                     </div>
                 </div>
 
                 <div class="content">
-                    <!-- الشعار الأيسر: خدمة عملاء لتعبئة السيارات -->
+                    <!-- الشعار الأيسر الداخلي -->
                     <div class="left-shield">
                         <div class="shield-icon">
-                            <img src="https://i.ibb.co/RkfmfFjF/Screenshot.png" alt="شعار خدمة عملاء">
+                            <img src="https://i.ibb.co/ksWSDR71/1782980542890.png" alt="شعار داخلي">
                         </div>
                         <p>خدمة عملاء<br>لتعبئة السيارات</p>
                     </div>
 
-                    <!-- الشعار الأيمن: رمز المياه -->
+                    <!-- الشعار الأيمن الداخلي -->
                     <div class="faucet">🚰</div>
 
                     <div class="header-info">
@@ -1075,7 +1127,6 @@
 
                     <div class="contact-section">
                         <div class="contact-left">
-                            <!-- شعار الحريصي الجديد -->
                             <div class="harisi-logo">
                                 <img src="https://i.ibb.co/bgV1Z7Px/2354.png" alt="شعار الحريصي">
                             </div>
@@ -1092,7 +1143,6 @@
                         </div>
                     </div>
 
-                    <!-- التذييل - السطر الإنجليزي في الأسفل -->
                     <div class="footer">
                         This receipt is intended for proof of payment only.
                     </div>
@@ -1259,6 +1309,12 @@
             wrapper.style.width = '210mm';
             wrapper.style.minHeight = '297mm';
 
+            // تأكيد ظهور جميع العناصر قبل التصدير
+            const allImages = element.querySelectorAll('img');
+            allImages.forEach(img => {
+                img.crossOrigin = 'anonymous';
+            });
+
             const opt = {
                 margin: 0,
                 filename: 'فاتورة-المياه-' + new Date().toLocaleDateString('ar-SA').replace(/\//g, '-') + '.pdf',
@@ -1266,8 +1322,12 @@
                 html2canvas: {
                     scale: 3,
                     useCORS: true,
+                    allowTaint: false,
                     width: 210 * 3.78,
                     height: 297 * 3.78,
+                    windowWidth: 210 * 3.78,
+                    windowHeight: 297 * 3.78,
+                    logging: false,
                 },
                 jsPDF: {
                     unit: 'mm',
