@@ -209,7 +209,7 @@
             padding: 20px;
         }
 
-        /* ===== الفاتورة - بحجم A4 بالكامل ===== */
+        /* ===== الفاتورة ===== */
         #receiptSection {
             display: none;
             position: fixed;
@@ -259,9 +259,6 @@
             justify-content: center;
         }
 
-        /* ===== الشعارات في الزوايا العلوية ===== */
-
-        /* الشعار الأيسر: خدمة عملاء لتعبئة السيارات */
         .top-left-logo {
             position: absolute;
             top: 50%;
@@ -287,10 +284,9 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
-        .top-left-logo .shield-icon img {
+        .top-left-logo .shield-icon svg {
             width: 100%;
             height: 100%;
-            object-fit: contain;
         }
 
         .top-left-logo p {
@@ -306,7 +302,6 @@
             border-radius: 4px;
         }
 
-        /* الشعار الأيمن: رمز المياه مع الصورة */
         .top-right-logo {
             position: absolute;
             top: 50%;
@@ -333,15 +328,9 @@
             overflow: hidden;
         }
 
-        .top-right-logo .water-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        .top-right-logo .water-icon .faucet-emoji {
-            font-size: 28px;
+        .top-right-logo .water-icon svg {
+            width: 70%;
+            height: 70%;
         }
 
         .top-right-logo p {
@@ -355,7 +344,6 @@
             border-radius: 4px;
         }
 
-        /* الشعار المركزي */
         .center-logo {
             position: absolute;
             top: 50%;
@@ -381,22 +369,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .center-logo-inner::before {
-            content: '💧';
             font-size: 26px;
-            filter: brightness(1.5);
         }
 
-        /* ===== المحتوى ===== */
         .content {
             padding: 12px 22px 10px;
             position: relative;
             min-height: calc(287mm - 85px);
         }
 
-        /* ===== الشعار الأيسر الداخلي ===== */
         .left-shield {
             position: absolute;
             top: 12px;
@@ -415,10 +396,9 @@
             justify-content: center;
         }
 
-        .left-shield .shield-icon img {
+        .left-shield .shield-icon svg {
             width: 100%;
             height: 100%;
-            object-fit: contain;
         }
 
         .left-shield p {
@@ -429,7 +409,6 @@
             margin: 0;
         }
 
-        /* ===== الشعار الأيمن الداخلي ===== */
         .faucet {
             position: absolute;
             top: 12px;
@@ -447,7 +426,6 @@
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
 
-        /* ===== العنوان ===== */
         .header-info {
             text-align: center;
             margin-top: 5px;
@@ -479,7 +457,6 @@
             margin-bottom: 2px;
         }
 
-        /* ===== الجدول ===== */
         .data-table {
             width: 100%;
             border-collapse: separate;
@@ -510,7 +487,6 @@
             border: 1px solid #c9a227;
         }
 
-        /* ===== المربعات السفلية ===== */
         .summary-boxes {
             display: flex;
             gap: 10px;
@@ -559,7 +535,6 @@
             font-weight: 900;
         }
 
-        /* ===== قسم التواصل ===== */
         .contact-section {
             display: flex;
             margin: 15px 0 0;
@@ -592,10 +567,9 @@
             justify-content: center;
         }
 
-        .harisi-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .harisi-logo svg {
+            width: 80%;
+            height: 80%;
         }
 
         .contact-left .name {
@@ -639,7 +613,6 @@
             font-weight: 700;
         }
 
-        /* ===== التذييل ===== */
         .footer {
             background: linear-gradient(180deg, #c9a227, #a8841f);
             padding: 18px;
@@ -654,7 +627,6 @@
             clear: both;
         }
 
-        /* ===== الزخارف ===== */
         .pen-decoration {
             position: absolute;
             bottom: 15px;
@@ -716,18 +688,12 @@
             opacity: 0.04;
             pointer-events: none;
             z-index: 1;
-        }
-
-        .watermark::before {
-            content: '💧';
             font-size: 100px;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* ===== الأزرار في الأسفل ===== */
         .receipt-buttons {
             display: flex;
             gap: 12px;
@@ -763,85 +729,67 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
-        /* ===== استجابة للشاشات الصغيرة ===== */
         @media screen and (max-width: 750px) {
             .receipt-wrapper {
                 width: 100%;
                 padding: 3mm;
                 min-height: auto;
             }
-
             .receipt-inner {
                 min-height: auto;
             }
-
             .content {
                 padding: 10px 12px;
                 min-height: auto;
             }
-
             .main-title {
                 font-size: 28px;
             }
-
             .project-location {
                 font-size: 16px;
             }
-
             .date-line,
             .time-line {
                 font-size: 15px;
             }
-
             .data-table th,
             .data-table td {
                 font-size: 16px;
                 padding: 12px 4px;
             }
-
             .summary-box .label {
                 font-size: 14px;
             }
-
             .summary-box .value {
                 font-size: 22px;
             }
-
             .contact-left {
                 width: 90px;
                 padding: 10px 6px;
             }
-
             .harisi-logo {
                 width: 60px;
                 height: 60px;
             }
-
             .contact-left .name {
                 font-size: 16px;
             }
-
             .phone-line {
                 font-size: 16px;
             }
-
             .note-title {
                 font-size: 15px;
             }
-
             .note-text {
                 font-size: 14px;
             }
-
             .footer {
                 font-size: 14px;
                 padding: 12px;
             }
-
             .left-shield {
                 display: none;
             }
-
             .faucet {
                 width: 45px;
                 height: 45px;
@@ -849,63 +797,48 @@
                 top: 8px;
                 right: 8px;
             }
-
             .top-left-logo .shield-icon {
                 width: 35px;
                 height: 40px;
             }
-
             .top-left-logo p {
                 font-size: 8px;
             }
-
             .top-right-logo .water-icon {
                 width: 35px;
                 height: 35px;
                 font-size: 18px;
             }
-
             .top-right-logo p {
                 font-size: 8px;
             }
-
             .pen-decoration,
             .pen-ring {
                 display: none;
             }
-
             .top-banner {
                 height: 65px;
             }
-
             .center-logo {
                 width: 50px;
                 height: 50px;
             }
-
             .center-logo-inner {
                 width: 36px;
                 height: 36px;
-            }
-
-            .center-logo-inner::before {
                 font-size: 18px;
             }
-
             .receipt-buttons button {
                 font-size: 1.1rem;
                 padding: 14px;
             }
-
             .summary-boxes {
                 flex-direction: column;
                 gap: 8px;
             }
-
             .contact-section {
                 flex-direction: column;
             }
-
             .contact-left {
                 width: 100%;
                 border-left: none;
@@ -914,17 +847,14 @@
                 padding: 10px;
                 gap: 12px;
             }
-
             .contact-left .line {
                 display: none;
             }
-
             .harisi-logo {
                 width: 50px;
                 height: 50px;
                 margin: 0;
             }
-
             .contact-left .name {
                 font-size: 18px;
             }
@@ -1049,22 +979,33 @@
                     <!-- الشعار الأيسر: خدمة عملاء لتعبئة السيارات -->
                     <div class="top-left-logo">
                         <div class="shield-icon">
-                            <img src="https://i.ibb.co/RkfmfFjF/Screenshot.png" alt="خدمة عملاء">
+                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="10" y="10" width="80" height="80" rx="15" fill="#1a4a6e" stroke="#d4af37" stroke-width="3"/>
+                                <path d="M35 35 L65 35 L65 65 L35 65 Z" fill="white" opacity="0.2"/>
+                                <text x="50" y="55" text-anchor="middle" font-size="14" fill="white" font-weight="bold">خدمة</text>
+                                <text x="50" y="72" text-anchor="middle" font-size="12" fill="#d4af37" font-weight="bold">عملاء</text>
+                                <circle cx="50" cy="30" r="8" fill="#d4af37" opacity="0.3"/>
+                                <circle cx="50" cy="30" r="4" fill="#d4af37"/>
+                            </svg>
                         </div>
                         <p>خدمة عملاء<br>لتعبئة السيارات</p>
                     </div>
 
-                    <!-- الشعار الأيمن: رمز المياه مع الصورة -->
+                    <!-- الشعار الأيمن: رمز المياه -->
                     <div class="top-right-logo">
                         <div class="water-icon">
-                            <img src="https://i.ibb.co/pBLypmxZ/1782979766389.jpg" alt="شعار المياه">
+                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M50 10 C50 10 20 50 20 70 C20 86 30 95 50 95 C70 95 80 86 80 70 C80 50 50 10 50 10Z" fill="#4a90d9" stroke="#2a5a8a" stroke-width="2"/>
+                                <path d="M50 25 C50 25 35 50 35 65 C35 75 42 82 50 82 C58 82 65 75 65 65 C65 50 50 25 50 25Z" fill="white" opacity="0.3"/>
+                                <text x="50" y="60" text-anchor="middle" font-size="20" fill="white" font-weight="bold">💧</text>
+                            </svg>
                         </div>
                         <p>تعبئة مياه</p>
                     </div>
 
                     <!-- الشعار المركزي -->
                     <div class="center-logo">
-                        <div class="center-logo-inner"></div>
+                        <div class="center-logo-inner">💧</div>
                     </div>
                 </div>
 
@@ -1072,7 +1013,13 @@
                     <!-- الشعار الأيسر الداخلي -->
                     <div class="left-shield">
                         <div class="shield-icon">
-                            <img src="https://i.ibb.co/ksWSDR71/1782980542890.png" alt="شعار داخلي">
+                            <svg viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M50 5 L15 25 L15 65 C15 85 30 100 50 105 C70 100 85 85 85 65 L85 25 L50 5Z" fill="#1a4a6e" stroke="#d4af37" stroke-width="2"/>
+                                <text x="50" y="45" text-anchor="middle" font-size="14" fill="#d4af37" font-weight="bold">خدمة</text>
+                                <text x="50" y="62" text-anchor="middle" font-size="12" fill="white" font-weight="bold">عملاء</text>
+                                <text x="50" y="80" text-anchor="middle" font-size="10" fill="#d4af37" font-weight="bold">تعبئة</text>
+                                <circle cx="50" cy="28" r="6" fill="#d4af37" opacity="0.5"/>
+                            </svg>
                         </div>
                         <p>خدمة عملاء<br>لتعبئة السيارات</p>
                     </div>
@@ -1128,7 +1075,14 @@
                     <div class="contact-section">
                         <div class="contact-left">
                             <div class="harisi-logo">
-                                <img src="https://i.ibb.co/bgV1Z7Px/2354.png" alt="شعار الحريصي">
+                                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="45" fill="#d4af37" stroke="#8b6914" stroke-width="2"/>
+                                    <text x="50" y="45" text-anchor="middle" font-size="16" fill="#1a1a2e" font-weight="900">الحريصي</text>
+                                    <text x="50" y="65" text-anchor="middle" font-size="12" fill="#1a1a2e" font-weight="700">للمياه</text>
+                                    <path d="M25 70 L75 70" stroke="#8b6914" stroke-width="2"/>
+                                    <circle cx="50" cy="30" r="8" fill="#1a4a6e" opacity="0.2"/>
+                                    <circle cx="50" cy="30" r="4" fill="#1a4a6e"/>
+                                </svg>
                             </div>
                             <div class="name">الحريصي</div>
                             <div class="line"></div>
@@ -1149,7 +1103,7 @@
 
                     <div class="pen-decoration"></div>
                     <div class="pen-ring"></div>
-                    <div class="watermark"></div>
+                    <div class="watermark">💧</div>
                 </div>
             </div>
         </div>
@@ -1309,12 +1263,6 @@
             wrapper.style.width = '210mm';
             wrapper.style.minHeight = '297mm';
 
-            // تأكيد ظهور جميع العناصر قبل التصدير
-            const allImages = element.querySelectorAll('img');
-            allImages.forEach(img => {
-                img.crossOrigin = 'anonymous';
-            });
-
             const opt = {
                 margin: 0,
                 filename: 'فاتورة-المياه-' + new Date().toLocaleDateString('ar-SA').replace(/\//g, '-') + '.pdf',
@@ -1322,7 +1270,6 @@
                 html2canvas: {
                     scale: 3,
                     useCORS: true,
-                    allowTaint: false,
                     width: 210 * 3.78,
                     height: 297 * 3.78,
                     windowWidth: 210 * 3.78,
