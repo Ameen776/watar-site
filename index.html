@@ -24,7 +24,6 @@
             overflow-x: hidden;
         }
 
-        /* ===== لوحة التحكم ===== */
         #controlSection {
             padding: 10px;
             min-height: 100vh;
@@ -174,7 +173,7 @@
         .record-item {
             background: #f8f9fa;
             border-radius: 10px;
-            padding: 12px;
+            padding: 15px;
             margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
@@ -182,21 +181,26 @@
             border-right: 4px solid #e94560;
         }
 
+        .record-info strong {
+            font-size: 18px;
+            color: #1a1a2e;
+        }
+
         .record-info span {
             display: inline-block;
             margin-left: 10px;
             color: #555;
-            font-size: 13px;
+            font-size: 15px;
         }
 
         .btn-delete {
             background: #dc3545;
             color: white;
             border: none;
-            padding: 6px 15px;
+            padding: 8px 18px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 14px;
         }
 
         .empty-msg {
@@ -205,7 +209,7 @@
             padding: 20px;
         }
 
-        /* ===== الفاتورة - تملأ الشاشة بالكامل ===== */
+        /* ===== الفاتورة ===== */
         #receiptSection {
             display: none;
             position: fixed;
@@ -223,10 +227,9 @@
             height: 100vh;
         }
 
-        /* تصميم الفاتورة بحجم كبير */
         .receipt-wrapper {
             width: 100%;
-            max-width: 900px;
+            max-width: 950px;
             min-height: 100vh;
             margin: 0 auto;
             background: linear-gradient(180deg, #6b4423 0%, #4a2e15 100%);
@@ -247,9 +250,9 @@
             padding-bottom: 10px;
         }
 
-        /* ===== البانر العلوي مع الشعار ===== */
+        /* ===== البانر العلوي ===== */
         .top-banner {
-            height: 100px;
+            height: 110px;
             background: linear-gradient(180deg, #1a4a6e 0%, #0d2d4a 100%);
             position: relative;
             display: flex;
@@ -329,25 +332,25 @@
 
         /* ===== المحتوى ===== */
         .content {
-            padding: 20px 30px 10px;
+            padding: 15px 25px 10px;
             position: relative;
-            min-height: calc(100vh - 130px);
+            min-height: calc(100vh - 140px);
         }
 
-        /* الشعار الأيسر - ظاهر الآن */
+        /* ===== الشعار الأيسر - ظاهر الآن ===== */
         .left-shield {
             position: absolute;
-            top: 15px;
-            left: 20px;
+            top: 10px;
+            left: 15px;
             text-align: center;
             z-index: 5;
         }
 
         .shield-icon {
-            width: 100px;
-            height: 110px;
+            width: 90px;
+            height: 100px;
             position: relative;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -360,26 +363,27 @@
         }
 
         .left-shield p {
-            font-size: 14px;
+            font-size: 13px;
             color: #1e4a6e;
-            font-weight: bold;
-            line-height: 1.6;
+            font-weight: 900;
+            line-height: 1.5;
+            margin: 0;
         }
 
-        /* الصنبور الأيمن */
+        /* ===== الصنبور الأيمن ===== */
         .faucet {
             position: absolute;
-            top: 15px;
-            right: 20px;
-            width: 75px;
-            height: 75px;
+            top: 10px;
+            right: 15px;
+            width: 70px;
+            height: 70px;
             background: linear-gradient(135deg, #d0d0d0, #a0a0a0);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 3px solid #d4af37;
-            font-size: 36px;
+            font-size: 32px;
             z-index: 5;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
@@ -387,41 +391,41 @@
         /* ===== العنوان ===== */
         .header-info {
             text-align: center;
-            margin-top: 15px;
-            margin-bottom: 20px;
-            padding-top: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            padding-top: 5px;
         }
 
         .main-title {
             color: #b8941f;
-            font-size: 48px;
+            font-size: 44px;
             font-weight: 900;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             letter-spacing: 2px;
         }
 
         .project-location {
             color: #b8941f;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .date-line,
         .time-line {
             color: #1e4a6e;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 800;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
-        /* ===== الجدول ===== */
+        /* ===== الجدول - مكبر ===== */
         .data-table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            margin: 20px 0;
+            margin: 15px 0;
             border: 3px solid #b8941f;
             border-radius: 8px;
             overflow: hidden;
@@ -430,7 +434,7 @@
         .data-table th {
             background: linear-gradient(180deg, #b8941f, #9a7b1a);
             color: white;
-            padding: 18px 10px;
+            padding: 16px 8px;
             font-size: 22px;
             font-weight: 900;
             border: 1px solid #9a7b1a;
@@ -438,7 +442,7 @@
 
         .data-table td {
             background: linear-gradient(180deg, #d4af37, #b8941f);
-            padding: 20px 8px;
+            padding: 18px 8px;
             text-align: center;
             font-size: 22px;
             color: #1e1e1e;
@@ -450,7 +454,7 @@
         .summary-boxes {
             display: flex;
             gap: 12px;
-            margin: 20px 0;
+            margin: 18px 0;
         }
 
         .summary-box {
@@ -458,7 +462,7 @@
             background: linear-gradient(180deg, #f4d03f, #d4af37, #b8941f);
             border: 3px solid #8b6914;
             border-radius: 10px;
-            padding: 20px 10px;
+            padding: 18px 10px;
             text-align: center;
             position: relative;
         }
@@ -483,29 +487,29 @@
 
         .summary-box .label {
             color: #1e3a5c;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .summary-box .value {
             color: #1e1e1e;
-            font-size: 36px;
+            font-size: 34px;
             font-weight: 900;
         }
 
         /* ===== قسم التواصل ===== */
         .contact-section {
             display: flex;
-            margin: 20px 0 0;
+            margin: 18px 0 0;
             border: 3px solid #b8941f;
             border-radius: 10px;
             overflow: hidden;
         }
 
         .contact-left {
-            width: 160px;
+            width: 150px;
             background: #f0ebe0;
             display: flex;
             flex-direction: column;
@@ -516,10 +520,10 @@
         }
 
         .al-harisi-logo {
-            width: 120px;
-            height: 120px;
+            width: 110px;
+            height: 110px;
             position: relative;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -533,41 +537,41 @@
         }
 
         .contact-left .name {
-            font-size: 28px;
+            font-size: 26px;
             color: #b8941f;
             font-weight: 900;
         }
 
         .contact-left .line {
-            width: 80px;
+            width: 70px;
             height: 3px;
             background: #b8941f;
-            margin: 5px 0;
+            margin: 4px 0;
         }
 
         .contact-right {
             flex: 1;
             background: linear-gradient(180deg, #c9a227, #a8841f);
-            padding: 20px 25px;
+            padding: 18px 22px;
             color: #1e1e1e;
         }
 
         .phone-line {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 900;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-align: center;
         }
 
         .note-title {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 900;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-align: center;
         }
 
         .note-text {
-            font-size: 20px;
+            font-size: 18px;
             line-height: 1.8;
             text-align: center;
             font-weight: 700;
@@ -576,23 +580,23 @@
         /* ===== التذييل ===== */
         .footer {
             background: linear-gradient(180deg, #c9a227, #a8841f);
-            padding: 20px;
+            padding: 18px;
             text-align: center;
             color: #1e1e1e;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 900;
-            margin-top: 20px;
+            margin-top: 18px;
             border-radius: 6px;
             letter-spacing: 1px;
         }
 
-        /* ===== الزخارف الجانبية ===== */
+        /* ===== الزخارف ===== */
         .pen-decoration {
             position: absolute;
             bottom: 20px;
             left: -12px;
             width: 40px;
-            height: 180px;
+            height: 170px;
             background: linear-gradient(90deg, #0a0a0a 0%, #2a2a2a 25%, #0a0a0a 50%, #2a2a2a 75%, #0a0a0a 100%);
             border-radius: 4px;
             transform: rotate(-15deg);
@@ -628,7 +632,7 @@
 
         .pen-ring {
             position: absolute;
-            bottom: 55px;
+            bottom: 50px;
             left: -8px;
             width: 34px;
             height: 8px;
@@ -665,7 +669,7 @@
             gap: 15px;
             margin-top: 20px;
             padding: 0 15px 20px;
-            max-width: 900px;
+            max-width: 950px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -695,67 +699,68 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
-        /* ===== استجابة للشاشات الصغيرة ===== */
-        @media screen and (max-width: 700px) {
+        /* ===== استجابة للشاشات ===== */
+        @media screen and (max-width: 750px) {
             .content {
-                padding: 15px;
+                padding: 10px 12px;
             }
 
             .main-title {
-                font-size: 32px;
+                font-size: 28px;
             }
 
             .project-location {
-                font-size: 18px;
+                font-size: 16px;
             }
 
             .date-line,
             .time-line {
-                font-size: 16px;
+                font-size: 15px;
             }
 
             .data-table th,
             .data-table td {
-                font-size: 16px;
-                padding: 12px 4px;
+                font-size: 15px;
+                padding: 10px 3px;
             }
 
             .summary-box .label {
-                font-size: 14px;
+                font-size: 13px;
             }
 
             .summary-box .value {
-                font-size: 24px;
+                font-size: 20px;
             }
 
             .contact-left {
-                width: 100px;
+                width: 80px;
+                padding: 10px 5px;
             }
 
             .al-harisi-logo {
-                width: 70px;
-                height: 70px;
+                width: 60px;
+                height: 60px;
             }
 
             .contact-left .name {
-                font-size: 18px;
-            }
-
-            .phone-line {
-                font-size: 18px;
-            }
-
-            .note-title {
                 font-size: 16px;
             }
 
+            .phone-line {
+                font-size: 16px;
+            }
+
+            .note-title {
+                font-size: 15px;
+            }
+
             .note-text {
-                font-size: 14px;
+                font-size: 13px;
             }
 
             .footer {
-                font-size: 14px;
-                padding: 12px;
+                font-size: 13px;
+                padding: 10px;
             }
 
             .left-shield {
@@ -763,11 +768,11 @@
             }
 
             .faucet {
-                width: 50px;
-                height: 50px;
-                font-size: 24px;
-                top: 10px;
-                right: 10px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+                top: 8px;
+                right: 8px;
             }
 
             .pen-decoration,
@@ -794,28 +799,55 @@
             }
 
             .blue-flower {
-                width: 20px;
-                height: 20px;
+                width: 18px;
+                height: 18px;
             }
 
             .blue-flower::before {
-                font-size: 18px;
+                font-size: 16px;
             }
 
             .flower-left,
             .flower-right {
-                gap: 3px;
+                gap: 2px;
                 padding: 0 5px;
             }
 
             .receipt-buttons button {
-                font-size: 1.2rem;
-                padding: 15px;
+                font-size: 1.1rem;
+                padding: 14px;
             }
 
             .summary-boxes {
                 flex-direction: column;
-                gap: 10px;
+                gap: 8px;
+            }
+
+            .contact-section {
+                flex-direction: column;
+            }
+
+            .contact-left {
+                width: 100%;
+                border-left: none;
+                border-bottom: 3px solid #b8941f;
+                flex-direction: row;
+                padding: 10px;
+                gap: 15px;
+            }
+
+            .contact-left .line {
+                display: none;
+            }
+
+            .al-harisi-logo {
+                width: 50px;
+                height: 50px;
+                margin: 0;
+            }
+
+            .contact-left .name {
+                font-size: 20px;
             }
         }
 
@@ -848,7 +880,7 @@
     </style>
 </head>
 <body>
-    <!-- ===== قسم لوحة التحكم ===== -->
+    <!-- ===== لوحة التحكم ===== -->
     <div id="controlSection">
         <div class="container">
             <h1>💧 لوحة تحكم فاتورة المياه</h1>
@@ -929,13 +961,14 @@
         </div>
     </div>
 
-    <!-- ===== قسم الفاتورة ===== -->
+    <!-- ===== الفاتورة ===== -->
     <div id="receiptSection">
         <div class="receipt-wrapper" id="receipt">
             <div class="receipt-inner">
-                <!-- البانر العلوي مع الشعار والزهور -->
+                <!-- البانر العلوي -->
                 <div class="top-banner">
                     <div class="flower-left">
+                        <span class="blue-flower"></span>
                         <span class="blue-flower"></span>
                         <span class="blue-flower"></span>
                         <span class="blue-flower"></span>
@@ -952,6 +985,7 @@
                         <span class="blue-flower"></span>
                         <span class="blue-flower"></span>
                         <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
                     </div>
                     <div class="center-logo">
                         <div class="center-logo-inner"></div>
@@ -959,7 +993,7 @@
                 </div>
 
                 <div class="content">
-                    <!-- الشعار الأيسر - أصبح ظاهراً الآن -->
+                    <!-- الشعار الأيسر - ظاهر الآن -->
                     <div class="left-shield">
                         <div class="shield-icon">
                             <img src="https://i.ibb.co/RkfmfFjF/Screenshot.png" alt="شعار خدمة عملاء">
@@ -1032,12 +1066,10 @@
                         </div>
                     </div>
 
-                    <!-- التذييل - السطر الإنجليزي في الأسفل -->
                     <div class="footer">
                         This receipt is intended for proof of payment only.
                     </div>
 
-                    <!-- الزخارف الجانبية -->
                     <div class="pen-decoration"></div>
                     <div class="pen-ring"></div>
                     <div class="watermark"></div>
@@ -1124,10 +1156,11 @@
             list.innerHTML = records.map(r => `
                     <div class="record-item">
                         <div class="record-info">
-                            <strong>${r.name}</strong><br>
+                            <strong>${r.name}</strong>
                             <span>📅 ${r.date}</span>
                             <span>🔢 ${r.responses} رد</span>
                             <span>💰 ${r.amount} ريال</span>
+                            <span>📆 ${r.day}</span>
                         </div>
                         <button class="btn-delete" onclick="deleteRecord(${r.id})">🗑️ حذف</button>
                     </div>
@@ -1171,15 +1204,15 @@
             });
 
             if (records.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5">لا توجد سجلات</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="5" style="font-size:22px;padding:25px;">لا توجد سجلات</td></tr>';
             } else {
                 tbody.innerHTML = records.map(r => `
                         <tr>
-                            <td>${r.name}</td>
-                            <td>${r.date}</td>
-                            <td>${r.responses}</td>
-                            <td>${r.amount} ريال</td>
-                            <td>${r.day}</td>
+                            <td style="font-size:22px;font-weight:900;">${r.name}</td>
+                            <td style="font-size:22px;font-weight:900;">${r.date}</td>
+                            <td style="font-size:22px;font-weight:900;">${r.responses}</td>
+                            <td style="font-size:22px;font-weight:900;">${r.amount} ريال</td>
+                            <td style="font-size:22px;font-weight:900;">${r.day}</td>
                         </tr>
                     `).join('');
             }
@@ -1195,9 +1228,8 @@
             const buttons = document.querySelector('.receipt-buttons');
             buttons.style.display = 'none';
 
-            // تأكد من ظهور الفاتورة بالكامل
             const wrapper = document.querySelector('.receipt-wrapper');
-            wrapper.style.maxWidth = '900px';
+            wrapper.style.maxWidth = '950px';
             wrapper.style.minHeight = '100vh';
 
             const opt = {
@@ -1205,15 +1237,15 @@
                 filename: 'فاتورة-المياه-' + new Date().toLocaleDateString('ar-SA').replace(/\//g, '-') + '.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: {
-                    scale: 2.5,
+                    scale: 2.8,
                     useCORS: true,
-                    width: 900,
+                    width: 950,
                     height: wrapper.scrollHeight,
                     windowHeight: wrapper.scrollHeight,
                 },
                 jsPDF: {
                     unit: 'px',
-                    format: [900, wrapper.scrollHeight],
+                    format: [950, wrapper.scrollHeight],
                     orientation: 'portrait'
                 },
                 pagebreak: { mode: 'avoid-all' }
