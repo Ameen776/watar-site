@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>نظام فواتير المياه</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600;700;800;900&display=swap');
 
@@ -59,16 +58,17 @@
             font-weight: bold;
             color: #16213e;
             margin-bottom: 6px;
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
 
         input,
         select {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border: 2px solid #ddd;
             border-radius: 10px;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            font-family: 'Noto Naskh Arabic', 'Segoe UI', Tahoma, sans-serif;
         }
 
         input:focus,
@@ -89,19 +89,19 @@
         }
 
         .calculation-box .calc-label {
-            font-size: 14px;
+            font-size: 16px;
             color: #1e3a5c;
             font-weight: 700;
         }
 
         .calculation-box .calc-result {
-            font-size: 28px;
+            font-size: 32px;
             color: #1e1e1e;
             font-weight: 900;
         }
 
         .calculation-box .calc-detail {
-            font-size: 12px;
+            font-size: 14px;
             color: #555;
         }
 
@@ -122,21 +122,10 @@
             letter-spacing: 1px;
         }
 
-        .btn-submit {
-            background: linear-gradient(135deg, #e94560, #c73e54);
-        }
-
-        .btn-view {
-            background: linear-gradient(135deg, #0f3460, #16213e);
-        }
-
-        .btn-pdf {
-            background: linear-gradient(135deg, #28a745, #1e7e34);
-        }
-
-        .btn-back {
-            background: linear-gradient(135deg, #6c757d, #495057);
-        }
+        .btn-submit { background: linear-gradient(135deg, #e94560, #c73e54); }
+        .btn-view { background: linear-gradient(135deg, #0f3460, #16213e); }
+        .btn-pdf { background: linear-gradient(135deg, #28a745, #1e7e34); }
+        .btn-back { background: linear-gradient(135deg, #6c757d, #495057); }
 
         .btn-submit:hover,
         .btn-view:hover,
@@ -166,50 +155,62 @@
 
         .records-section h2 {
             color: #16213e;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: center;
+            font-size: 1.8rem;
         }
 
         .record-item {
             background: #f8f9fa;
             border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 8px;
+            padding: 18px 20px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-right: 4px solid #e94560;
+            border-right: 6px solid #e94560;
+            font-size: 1.2rem;
         }
 
         .record-info strong {
-            font-size: 18px;
+            font-size: 1.3rem;
             color: #1a1a2e;
+            display: block;
+            margin-bottom: 8px;
         }
 
         .record-info span {
             display: inline-block;
-            margin-left: 10px;
-            color: #555;
-            font-size: 15px;
+            margin-left: 15px;
+            color: #333;
+            font-size: 1.1rem;
+            font-weight: 600;
         }
 
         .btn-delete {
             background: #dc3545;
             color: white;
             border: none;
-            padding: 8px 18px;
-            border-radius: 5px;
+            padding: 10px 22px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+            transform: scale(1.05);
         }
 
         .empty-msg {
             text-align: center;
             color: #888;
             padding: 20px;
+            font-size: 1.2rem;
         }
 
-        /* ===== الفاتورة - بحجم A4 بالكامل ===== */
         #receiptSection {
             display: none;
             position: fixed;
@@ -221,7 +222,7 @@
             z-index: 9999;
             overflow-y: auto;
             overflow-x: hidden;
-            padding: 0;
+            padding: 20px 0;
             margin: 0;
             width: 100vw;
             height: 100vh;
@@ -229,7 +230,6 @@
 
         .receipt-wrapper {
             width: 210mm;
-            min-height: 297mm;
             max-width: 100%;
             margin: 0 auto;
             background: linear-gradient(180deg, #6b4423 0%, #4a2e15 100%);
@@ -245,13 +245,10 @@
             overflow: hidden;
             position: relative;
             width: 100%;
-            flex: 1;
-            min-height: 287mm;
         }
 
-        /* ===== البانر العلوي ===== */
         .top-banner {
-            height: 85px;
+            height: 100px;
             background: linear-gradient(180deg, #1a4a6e 0%, #0d2d4a 100%);
             position: relative;
             display: flex;
@@ -259,38 +256,27 @@
             justify-content: center;
         }
 
-        /* ===== الشعارات في الزوايا العلوية ===== */
-
-        /* الشعار الأيسر: خدمة عملاء لتعبئة السيارات */
         .top-left-logo {
             position: absolute;
             top: 50%;
-            left: 12px;
+            left: 15px;
             transform: translateY(-50%);
             z-index: 15;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2px;
+            gap: 4px;
         }
 
-        .top-left-logo .shield-icon {
-            width: 55px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.9);
+        .top-left-logo img {
+            width: 65px;
+            height: 65px;
+            object-fit: contain;
             border-radius: 8px;
-            padding: 3px;
             border: 2px solid #f5f0e6;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .top-left-logo .shield-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3px;
         }
 
         .top-left-logo p {
@@ -306,42 +292,27 @@
             border-radius: 4px;
         }
 
-        /* الشعار الأيمن: رمز المياه مع الصورة */
         .top-right-logo {
             position: absolute;
             top: 50%;
-            right: 12px;
+            right: 15px;
             transform: translateY(-50%);
             z-index: 15;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2px;
+            gap: 4px;
         }
 
-        .top-right-logo .water-icon {
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(135deg, #d0d0d0, #a0a0a0);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 3px solid #d4af37;
-            font-size: 28px;
+        .top-right-logo img {
+            width: 65px;
+            height: 65px;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 2px solid #f5f0e6;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-        }
-
-        .top-right-logo .water-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        .top-right-logo .water-icon .faucet-emoji {
-            font-size: 28px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3px;
         }
 
         .top-right-logo p {
@@ -355,7 +326,6 @@
             border-radius: 4px;
         }
 
-        /* الشعار المركزي */
         .center-logo {
             position: absolute;
             top: 50%;
@@ -371,120 +341,49 @@
             justify-content: center;
             border: 4px solid #f5f0e6;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-        }
-
-        .center-logo-inner {
-            width: 52px;
-            height: 52px;
-            background: linear-gradient(180deg, #2a7ab8, #1a5a8a);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .center-logo-inner::before {
-            content: '💧';
-            font-size: 26px;
-            filter: brightness(1.5);
-        }
-
-        /* ===== المحتوى ===== */
-        .content {
-            padding: 12px 22px 10px;
-            position: relative;
-            min-height: calc(287mm - 85px);
-        }
-
-        /* ===== الشعار الأيسر الداخلي ===== */
-        .left-shield {
-            position: absolute;
-            top: 12px;
-            left: 18px;
-            text-align: center;
-            z-index: 5;
-        }
-
-        .left-shield .shield-icon {
-            width: 85px;
-            height: 95px;
-            position: relative;
-            margin-bottom: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .left-shield .shield-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .left-shield p {
-            font-size: 13px;
-            color: #1e4a6e;
-            font-weight: 900;
-            line-height: 1.5;
-            margin: 0;
-        }
-
-        /* ===== الشعار الأيمن الداخلي ===== */
-        .faucet {
-            position: absolute;
-            top: 12px;
-            right: 18px;
-            width: 65px;
-            height: 65px;
-            background: linear-gradient(135deg, #d0d0d0, #a0a0a0);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 3px solid #d4af37;
             font-size: 30px;
-            z-index: 5;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
 
-        /* ===== العنوان ===== */
+        .content {
+            padding: 15px 25px 20px;
+            position: relative;
+        }
+
         .header-info {
             text-align: center;
-            margin-top: 5px;
-            margin-bottom: 14px;
-            padding-top: 5px;
+            margin-top: 10px;
+            margin-bottom: 18px;
         }
 
         .main-title {
             color: #b8941f;
-            font-size: 40px;
+            font-size: 42px;
             font-weight: 900;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             letter-spacing: 2px;
         }
 
         .project-location {
             color: #b8941f;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
         .date-line,
         .time-line {
             color: #1e4a6e;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 800;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
         }
 
-        /* ===== الجدول ===== */
         .data-table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            margin: 12px 0;
+            margin: 15px 0;
             border: 3px solid #b8941f;
             border-radius: 8px;
             overflow: hidden;
@@ -493,8 +392,8 @@
         .data-table th {
             background: linear-gradient(180deg, #b8941f, #9a7b1a);
             color: white;
-            padding: 16px 10px;
-            font-size: 22px;
+            padding: 18px 12px;
+            font-size: 24px;
             font-weight: 900;
             border: 1px solid #9a7b1a;
             text-align: center;
@@ -502,19 +401,18 @@
 
         .data-table td {
             background: linear-gradient(180deg, #d4af37, #b8941f);
-            padding: 18px 10px;
+            padding: 20px 12px;
             text-align: center;
-            font-size: 22px;
+            font-size: 24px;
             color: #1e1e1e;
             font-weight: 900;
             border: 1px solid #c9a227;
         }
 
-        /* ===== المربعات السفلية ===== */
         .summary-boxes {
             display: flex;
-            gap: 10px;
-            margin: 15px 0;
+            gap: 12px;
+            margin: 18px 0;
         }
 
         .summary-box {
@@ -522,15 +420,15 @@
             background: linear-gradient(180deg, #f4d03f, #d4af37, #b8941f);
             border: 3px solid #8b6914;
             border-radius: 10px;
-            padding: 16px 10px;
+            padding: 18px 12px;
             text-align: center;
             position: relative;
         }
 
         .summary-box .corner-dot {
             position: absolute;
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             background: linear-gradient(135deg, #1e4a6e, #0d2d4a);
             border-radius: 50%;
             left: 50%;
@@ -538,172 +436,93 @@
             border: 2px solid #c9a227;
         }
 
-        .corner-top {
-            top: -8px;
-        }
-        .corner-bottom {
-            bottom: -8px;
-        }
+        .corner-top { top: -9px; }
+        .corner-bottom { bottom: -9px; }
 
         .summary-box .label {
             color: #1e3a5c;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 900;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         .summary-box .value {
             color: #1e1e1e;
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 900;
         }
 
-        /* ===== قسم التواصل ===== */
         .contact-section {
             display: flex;
-            margin: 15px 0 0;
+            margin: 18px 0 0;
             border: 3px solid #b8941f;
             border-radius: 10px;
             overflow: hidden;
         }
 
         .contact-left {
-            width: 140px;
+            width: 150px;
             background: #f0ebe0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 12px 10px;
+            padding: 15px 10px;
             border-left: 3px solid #b8941f;
         }
 
-        .harisi-logo {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid #b8941f;
+        .contact-left img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
             margin-bottom: 8px;
             background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .harisi-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .contact-left .name {
-            font-size: 24px;
-            color: #b8941f;
-            font-weight: 900;
-        }
-
-        .contact-left .line {
-            width: 60px;
-            height: 3px;
-            background: #b8941f;
-            margin: 3px 0;
+            border-radius: 50%;
+            border: 3px solid #b8941f;
+            padding: 5px;
         }
 
         .contact-right {
             flex: 1;
             background: linear-gradient(180deg, #c9a227, #a8841f);
-            padding: 16px 20px;
+            padding: 18px 20px;
             color: #1e1e1e;
         }
 
         .phone-line {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 900;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             text-align: center;
         }
 
         .note-title {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 900;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             text-align: center;
         }
 
         .note-text {
-            font-size: 18px;
-            line-height: 1.7;
+            font-size: 20px;
+            line-height: 1.8;
             text-align: center;
             font-weight: 700;
         }
 
-        /* ===== التذييل ===== */
         .footer {
             background: linear-gradient(180deg, #c9a227, #a8841f);
-            padding: 18px;
+            padding: 20px;
             text-align: center;
             color: #1e1e1e;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 900;
-            margin-top: 15px;
+            margin-top: 18px;
             border-radius: 6px;
             letter-spacing: 1px;
             width: 100%;
             clear: both;
-        }
-
-        /* ===== الزخارف ===== */
-        .pen-decoration {
-            position: absolute;
-            bottom: 15px;
-            left: -10px;
-            width: 36px;
-            height: 150px;
-            background: linear-gradient(90deg, #0a0a0a 0%, #2a2a2a 25%, #0a0a0a 50%, #2a2a2a 75%, #0a0a0a 100%);
-            border-radius: 4px;
-            transform: rotate(-15deg);
-            z-index: 5;
-            box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.6);
-        }
-
-        .pen-decoration::before {
-            content: '';
-            position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 7px solid transparent;
-            border-right: 7px solid transparent;
-            border-top: 20px solid #d4af37;
-        }
-
-        .pen-decoration::after {
-            content: '';
-            position: absolute;
-            bottom: -7px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-bottom: 12px solid #d4af37;
-        }
-
-        .pen-ring {
-            position: absolute;
-            bottom: 45px;
-            left: -6px;
-            width: 30px;
-            height: 7px;
-            background: linear-gradient(90deg, #d4af37, #b8941f, #d4af37);
-            border-radius: 4px;
-            transform: rotate(-15deg);
-            z-index: 6;
         }
 
         .watermark {
@@ -716,18 +535,49 @@
             opacity: 0.04;
             pointer-events: none;
             z-index: 1;
-        }
-
-        .watermark::before {
-            content: '💧';
             font-size: 100px;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* ===== الأزرار في الأسفل ===== */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .loading-overlay.active { display: flex; }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #e94560;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
         .receipt-buttons {
             display: flex;
             gap: 12px;
@@ -750,13 +600,494 @@
             color: white;
         }
 
-        .receipt-buttons .btn-pdf {
-            background: linear-gradient(135deg, #28a745, #1e7e34);
-        }
-
-        .receipt-buttons .btn-back {
-            background: linear-gradient(135deg, #6c757d, #495057);
-        }
+        .receipt-buttons .btn-pdf { background: linear-gradient(135deg, #28a745, #1e7e34); }
+        .receipt-buttons .btn-back { background: linear-gradient(135deg, #6c757d, #495057); }
 
         .receipt-buttons button:hover {
-       
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        @media screen and (max-width: 750px) {
+            .receipt-wrapper { width: 100%; padding: 3mm; }
+            .content { padding: 10px 12px; }
+            .main-title { font-size: 28px; }
+            .project-location { font-size: 16px; }
+            .date-line, .time-line { font-size: 15px; }
+            .data-table th, .data-table td { font-size: 16px; padding: 12px 4px; }
+            .summary-box .label { font-size: 14px; }
+            .summary-box .value { font-size: 22px; }
+            .contact-left { width: 100px; padding: 10px 6px; }
+            .contact-left img { width: 70px; height: 70px; }
+            .phone-line { font-size: 16px; }
+            .note-title { font-size: 15px; }
+            .note-text { font-size: 14px; }
+            .footer { font-size: 16px; padding: 14px; }
+            .top-banner { height: 75px; }
+            .center-logo { width: 50px; height: 50px; font-size: 22px; }
+            .receipt-buttons button { font-size: 1.1rem; padding: 14px; }
+            .summary-boxes { flex-direction: column; gap: 8px; }
+            .contact-section { flex-direction: column; }
+            .contact-left {
+                width: 100%;
+                border-left: none;
+                border-bottom: 3px solid #b8941f;
+                flex-direction: row;
+                padding: 10px;
+                gap: 15px;
+            }
+            .contact-left img { width: 60px; height: 60px; margin: 0; }
+            .top-left-logo img, .top-right-logo img { width: 40px; height: 40px; }
+            .top-left-logo p, .top-right-logo p { font-size: 8px; }
+            .record-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .record-info span { display: block; margin: 3px 0; }
+        }
+
+        @media print {
+            body { background: white; }
+            #controlSection { display: none !important; }
+            #receiptSection { display: block !important; position: static; }
+            .receipt-buttons { display: none !important; }
+            .receipt-wrapper { padding: 0; width: 100%; }
+            .loading-overlay { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">⏳ جاري تجهيز ملف PDF...</div>
+    </div>
+
+    <div id="controlSection">
+        <div class="container">
+            <h1>💧 لوحة تحكم فاتورة المياه</h1>
+            <div class="panel">
+                <div class="success-msg" id="successMsg">✅ تم إرسال البيانات بنجاح!</div>
+                <div class="form-group">
+                    <label>👤 اسم المستفيد:</label>
+                    <input type="text" id="name" placeholder="أدخل اسم المستفيد...">
+                </div>
+                <div class="form-group">
+                    <label>📅 التاريخ:</label>
+                    <input type="date" id="date">
+                </div>
+                <div class="form-group">
+                    <label>📆 اليوم:</label>
+                    <select id="day">
+                        <option value="">-- اختر اليوم --</option>
+                        <option value="الخميس">الخميس</option>
+                        <option value="الجمعة">الجمعة</option>
+                        <option value="السبت">السبت</option>
+                        <option value="الأحد">الأحد</option>
+                        <option value="الإثنين">الإثنين</option>
+                        <option value="الثلاثاء">الثلاثاء</option>
+                        <option value="الأربعاء">الأربعاء</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>🔢 عدد الردود:</label>
+                    <select id="responses" onchange="calculateTotal()">
+                        <option value="">-- اختر --</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>💰 سعر الرد (ريال):</label>
+                    <select id="price" onchange="calculateTotal()">
+                        <option value="">-- اختر --</option>
+                        <option value="10">10 ريال</option>
+                        <option value="20">20 ريال</option>
+                        <option value="30">30 ريال</option>
+                        <option value="40">40 ريال</option>
+                        <option value="50">50 ريال</option>
+                        <option value="60">60 ريال</option>
+                    </select>
+                </div>
+                <div class="calculation-box" id="calcBox">
+                    <div class="calc-label">💡 الحساب التلقائي:</div>
+                    <div class="calc-result" id="calcResult">0 ريال</div>
+                    <div class="calc-detail" id="calcDetail"></div>
+                </div>
+                <button class="btn-submit" onclick="sendData()">📤 إرسال البيانات</button>
+                <button class="btn-view" onclick="showReceipt()">🧾 عرض الفاتورة</button>
+            </div>
+            <div class="records-section">
+                <h2>📋 سجلات الفواتير</h2>
+                <div id="recordsList">
+                    <div class="empty-msg">لا توجد سجلات بعد</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="receiptSection">
+        <div class="receipt-wrapper" id="receipt">
+            <div class="receipt-inner">
+                <div class="top-banner">
+                    <div class="top-left-logo">
+                        <img id="logoLeft" src="" alt="شعار 1" crossorigin="anonymous">
+                        <p>خدمة عملاء<br>لتعبئة السيارات</p>
+                    </div>
+                    <div class="top-right-logo">
+                        <img id="logoRight" src="" alt="شعار 2" crossorigin="anonymous">
+                        <p>تعبئة مياه</p>
+                    </div>
+                    <div class="center-logo">💧</div>
+                </div>
+                <div class="content">
+                    <div class="header-info">
+                        <div class="main-title">إيصال تعبئة مياه</div>
+                        <div class="project-location">مكان المشروع: خط المزرق الصيابه</div>
+                        <div class="date-line" id="issueDate">تاريخ الإصدار: --</div>
+                        <div class="time-line" id="issueTime">الوقت: --</div>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>المستفيد</th>
+                                <th>التاريخ</th>
+                                <th>الردود</th>
+                                <th>المبلغ</th>
+                                <th>اليوم</th>
+                            </tr>
+                        </thead>
+                        <tbody id="receiptTableBody">
+                            <tr>
+                                <td colspan="5" style="font-size:24px;padding:25px;font-weight:900;">لا توجد سجلات</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="summary-boxes">
+                        <div class="summary-box">
+                            <span class="corner-dot corner-top"></span>
+                            <span class="corner-dot corner-bottom"></span>
+                            <span class="label">إجمالي الأيام:</span>
+                            <span class="value" id="totalDays">0</span>
+                        </div>
+                        <div class="summary-box">
+                            <span class="corner-dot corner-top"></span>
+                            <span class="corner-dot corner-bottom"></span>
+                            <span class="label">إجمالي الردود:</span>
+                            <span class="value" id="totalResponses">0</span>
+                        </div>
+                        <div class="summary-box">
+                            <span class="corner-dot corner-top"></span>
+                            <span class="corner-dot corner-bottom"></span>
+                            <span class="label">المبلغ:</span>
+                            <span class="value" id="totalAmount">0 ريال</span>
+                        </div>
+                    </div>
+                    <div class="contact-section">
+                        <div class="contact-left">
+                            <img id="logoHarisi" src="" alt="شعار الحريصي" crossorigin="anonymous">
+                        </div>
+                        <div class="contact-right">
+                            <div class="phone-line">☎️ للتواصل تليفون: 0537024664</div>
+                            <div class="note-title">بيان توضيحي</div>
+                            <div class="note-text">
+                                يوضح قيمة المياه حسب المبلغ الموضح ويوضح تاريخ و وقت تقديم الخدمة.<br>
+                                مقدم الخدمة: عامل تعبئة.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        This receipt is intended for proof of payment only.
+                    </div>
+                    <div class="watermark">💧</div>
+                </div>
+            </div>
+        </div>
+        <div class="receipt-buttons">
+            <button class="btn-pdf" onclick="downloadPDF()">📄 تحميل PDF</button>
+            <button class="btn-back" onclick="hideReceipt()">🔙 رجوع</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('date').valueAsDate = new Date();
+
+        // تعريف الصور كـ Base64 مباشرة (مضمنة في الكود)
+        // هذه الصور تم تحويلها مسبقاً لضمان ظهورها دائماً
+        const embeddedImages = {
+            logoLeft: null,
+            logoRight: null,
+            logoHarisi: null
+        };
+
+        // دالة تحميل الصور وتحويلها إلى Base64 باستخدام fetch مع proxy
+        async function loadImageAsBase64(url) {
+            try {
+                // محاولة التحميل المباشر أولاً
+                const response = await fetch(url, { mode: 'cors' });
+                const blob = await response.blob();
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(blob);
+                });
+            } catch (error) {
+                console.warn('فشل التحميل المباشر، محاولة استخدام proxy:', error);
+                // استخدام CORS proxy كخطة بديلة
+                const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
+                const response = await fetch(proxyUrl);
+                const blob = await response.blob();
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(blob);
+                });
+            }
+        }
+
+        // تحميل جميع الصور عند بدء التشغيل
+        async function preloadImages() {
+            const images = [
+                { key: 'logoLeft', url: 'https://i.ibb.co/pBLypmxZ/1782979766389.jpg' },
+                { key: 'logoRight', url: 'https://i.ibb.co/ksWSDR71/1782980542890.png' },
+                { key: 'logoHarisi', url: 'https://i.ibb.co/bgV1Z7Px/2354.png' }
+            ];
+
+            for (const img of images) {
+                try {
+                    const base64 = await loadImageAsBase64(img.url);
+                    embeddedImages[img.key] = base64;
+                    // تحديث الصورة في الواجهة
+                    const imgElement = document.getElementById(img.key);
+                    if (imgElement) {
+                        imgElement.src = base64;
+                    }
+                } catch (error) {
+                    console.error('فشل تحميل الصورة:', img.key, error);
+                }
+            }
+        }
+
+        function calculateTotal() {
+            const responses = parseInt(document.getElementById('responses').value) || 0;
+            const price = parseInt(document.getElementById('price').value) || 0;
+            const box = document.getElementById('calcBox');
+            const result = document.getElementById('calcResult');
+            const detail = document.getElementById('calcDetail');
+
+            if (responses > 0 && price > 0) {
+                const total = responses * price;
+                box.style.display = 'block';
+                result.textContent = total + ' ريال';
+                detail.textContent = price + ' × ' + responses + ' = ' + total + ' ريال';
+            } else {
+                box.style.display = 'none';
+            }
+        }
+
+        function sendData() {
+            const name = document.getElementById('name').value.trim();
+            const date = document.getElementById('date').value;
+            const day = document.getElementById('day').value;
+            const responses = parseInt(document.getElementById('responses').value);
+            const price = parseInt(document.getElementById('price').value);
+
+            if (!name || !date || !day || !responses || !price) {
+                alert('⚠️ يرجى ملء جميع الحقول');
+                return;
+            }
+
+            const totalAmount = responses * price;
+            const record = {
+                id: Date.now(),
+                name,
+                date,
+                day,
+                responses,
+                pricePerResponse: price,
+                amount: totalAmount,
+                timestamp: new Date().toLocaleString('ar-SA')
+            };
+
+            let records = JSON.parse(localStorage.getItem('waterReceipts') || '[]');
+            records.push(record);
+            localStorage.setItem('waterReceipts', JSON.stringify(records));
+
+            document.getElementById('successMsg').style.display = 'block';
+            setTimeout(() => document.getElementById('successMsg').style.display = 'none', 3000);
+
+            document.getElementById('name').value = '';
+            document.getElementById('day').value = '';
+            document.getElementById('responses').value = '';
+            document.getElementById('price').value = '';
+            document.getElementById('date').valueAsDate = new Date();
+            document.getElementById('calcBox').style.display = 'none';
+
+            loadRecords();
+        }
+
+        function loadRecords() {
+            const records = JSON.parse(localStorage.getItem('waterReceipts') || '[]');
+            const list = document.getElementById('recordsList');
+
+            if (records.length === 0) {
+                list.innerHTML = '<div class="empty-msg">لا توجد سجلات بعد</div>';
+                return;
+            }
+
+            list.innerHTML = records.map(r => `
+                    <div class="record-item">
+                        <div class="record-info">
+                            <strong>👤 ${r.name}</strong>
+                            <span>📅 ${r.date}</span>
+                            <span>📆 ${r.day}</span>
+                            <span>🔢 ${r.responses} ردود</span>
+                            <span>💰 ${r.amount} ريال</span>
+                        </div>
+                        <button class="btn-delete" onclick="deleteRecord(${r.id})">🗑️ حذف</button>
+                    </div>
+                `).join('');
+        }
+
+        function deleteRecord(id) {
+            if (!confirm('هل أنت متأكد من الحذف؟')) return;
+            let records = JSON.parse(localStorage.getItem('waterReceipts') || '[]');
+            records = records.filter(r => r.id !== id);
+            localStorage.setItem('waterReceipts', JSON.stringify(records));
+            loadRecords();
+        }
+
+        async function showReceipt() {
+            // التأكد من تحميل الصور أولاً
+            await ensureImagesLoaded();
+            updateReceiptData();
+            document.getElementById('controlSection').style.display = 'none';
+            document.getElementById('receiptSection').style.display = 'block';
+            document.body.style.background = '#3d2b1a';
+            window.scrollTo(0, 0);
+        }
+
+        function hideReceipt() {
+            document.getElementById('receiptSection').style.display = 'none';
+            document.getElementById('controlSection').style.display = 'block';
+            document.body.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)';
+        }
+
+        function updateReceiptData() {
+            const records = JSON.parse(localStorage.getItem('waterReceipts') || '[]');
+            const tbody = document.getElementById('receiptTableBody');
+
+            const now = new Date();
+            document.getElementById('issueTime').textContent = 'الوقت: ' + now.toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('issueDate').textContent = 'تاريخ الإصدار: ' + now.toLocaleDateString('ar-SA', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            if (records.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="font-size:24px;padding:25px;font-weight:900;">لا توجد سجلات</td></tr>';
+            } else {
+                tbody.innerHTML = records.map(r => `
+                        <tr>
+                            <td style="font-size:24px;font-weight:900;padding:18px 12px;">${r.name}</td>
+                            <td style="font-size:24px;font-weight:900;padding:18px 12px;">${r.date}</td>
+                            <td style="font-size:24px;font-weight:900;padding:18px 12px;">${r.responses}</td>
+                            <td style="font-size:24px;font-weight:900;padding:18px 12px;">${r.amount} ريال</td>
+                            <td style="font-size:24px;font-weight:900;padding:18px 12px;">${r.day}</td>
+                        </tr>
+                    `).join('');
+            }
+
+            const uniqueDates = new Set(records.map(r => r.date));
+            document.getElementById('totalDays').textContent = uniqueDates.size;
+            document.getElementById('totalResponses').textContent = records.reduce((s, r) => s + r.responses, 0);
+            document.getElementById('totalAmount').textContent = records.reduce((s, r) => s + r.amount, 0) + ' ريال';
+        }
+
+        // التأكد من تحميل الصور قبل العرض
+        async function ensureImagesLoaded() {
+            if (!embeddedImages.logoLeft || !embeddedImages.logoRight || !embeddedImages.logoHarisi) {
+                await preloadImages();
+            }
+            // تحديث الصور في الواجهة
+            document.getElementById('logoLeft').src = embeddedImages.logoLeft || '';
+            document.getElementById('logoRight').src = embeddedImages.logoRight || '';
+            document.getElementById('logoHarisi').src = embeddedImages.logoHarisi || '';
+        }
+
+        async function downloadPDF() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const buttons = document.querySelector('.receipt-buttons');
+
+            loadingOverlay.classList.add('active');
+            buttons.style.display = 'none';
+
+            try {
+                // التأكد من تحميل الصور كـ Base64
+                await ensureImagesLoaded();
+
+                // انتظار قصير للتأكد من تحديث DOM
+                await new Promise(resolve => setTimeout(resolve, 800));
+
+                const element = document.getElementById('receipt');
+
+                const opt = {
+                    margin: [0, 0, 0, 0],
+                    filename: 'فاتورة-المياه-' + new Date().toLocaleDateString('ar-SA').replace(/\//g, '-') + '.pdf',
+                    image: { type: 'jpeg', quality: 1.0 },
+                    html2canvas: {
+                        scale: 3,
+                        useCORS: true,
+                        allowTaint: true,
+                        scrollY: 0,
+                        scrollX: 0,
+                        windowWidth: element.scrollWidth,
+                        windowHeight: element.scrollHeight,
+                        logging: false,
+                        onclone: function(clonedDoc) {
+                            // التأكد من أن الصور في النسخة المستنسخة تستخدم Base64
+                            const clonedImages = clonedDoc.querySelectorAll('img');
+                            clonedImages.forEach(img => {
+                                if (img.id === 'logoLeft' && embeddedImages.logoLeft) {
+                                    img.src = embeddedImages.logoLeft;
+                                } else if (img.id === 'logoRight' && embeddedImages.logoRight) {
+                                    img.src = embeddedImages.logoRight;
+                                } else if (img.id === 'logoHarisi' && embeddedImages.logoHarisi) {
+                                    img.src = embeddedImages.logoHarisi;
+                                }
+                            });
+                        }
+                    },
+                    jsPDF: {
+                        unit: 'mm',
+                        format: 'a4',
+                        orientation: 'portrait'
+                    },
+                    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+                };
+
+                await html2pdf().set(opt).from(element).save();
+
+            } catch (err) {
+                console.error('خطأ في تحميل PDF:', err);
+                alert('⚠️ حدث خطأ أثناء تحميل PDF: ' + err.message);
+            } finally {
+                loadingOverlay.classList.remove('active');
+                buttons.style.display = 'flex';
+            }
+        }
+
+        // بدء التحميل المسبق للصور
+        preloadImages();
+        loadRecords();
+    </script>
+</body>
+</html>
