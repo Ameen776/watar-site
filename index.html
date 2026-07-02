@@ -221,7 +221,7 @@
             z-index: 9999;
             overflow-y: auto;
             overflow-x: hidden;
-            padding: 0;
+            padding: 20px 0;
             margin: 0;
             width: 100vw;
             height: 100vh;
@@ -229,7 +229,6 @@
 
         .receipt-wrapper {
             width: 210mm;
-            min-height: 297mm;
             max-width: 100%;
             margin: 0 auto;
             background: linear-gradient(180deg, #6b4423 0%, #4a2e15 100%);
@@ -245,8 +244,6 @@
             overflow: hidden;
             position: relative;
             width: 100%;
-            flex: 1;
-            min-height: 287mm;
         }
 
         /* ===== البانر العلوي ===== */
@@ -373,9 +370,8 @@
         }
 
         .content {
-            padding: 12px 22px 10px;
+            padding: 12px 22px 20px;
             position: relative;
-            min-height: calc(287mm - 85px);
         }
 
         .left-shield {
@@ -733,14 +729,9 @@
             .receipt-wrapper {
                 width: 100%;
                 padding: 3mm;
-                min-height: auto;
-            }
-            .receipt-inner {
-                min-height: auto;
             }
             .content {
                 padding: 10px 12px;
-                min-height: auto;
             }
             .main-title {
                 font-size: 28px;
@@ -877,13 +868,6 @@
             .receipt-wrapper {
                 padding: 0;
                 width: 100%;
-                min-height: auto;
-            }
-            .receipt-inner {
-                min-height: auto;
-            }
-            .content {
-                min-height: auto;
             }
         }
     </style>
@@ -1254,47 +1238,40 @@
             document.getElementById('totalAmount').textContent = records.reduce((s, r) => s + r.amount, 0) + ' ريال';
         }
 
-        function downloadPDF() {
+        async function downloadPDF() {
             const element = document.getElementById('receipt');
             const buttons = document.querySelector('.receipt-buttons');
             buttons.style.display = 'none';
 
-            const wrapper = document.querySelector('.receipt-wrapper');
-            wrapper.style.width = '210mm';
-            wrapper.style.minHeight = '297mm';
-
+            // إعدادات محسّنة لضمان ظهور الفاتورة كاملة
             const opt = {
-                margin: 0,
+                margin: [0, 0, 0, 0],
                 filename: 'فاتورة-المياه-' + new Date().toLocaleDateString('ar-SA').replace(/\//g, '-') + '.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: {
-                    scale: 3,
+                    scale: 2,
                     useCORS: true,
-                    width: 210 * 3.78,
-                    height: 297 * 3.78,
-                    windowWidth: 210 * 3.78,
-                    windowHeight: 297 * 3.78,
-                    logging: false,
+                    scrollY: 0,
+                    scrollX: 0,
+                    windowWidth: element.scrollWidth,
+                    windowHeight: element.scrollHeight
                 },
                 jsPDF: {
                     unit: 'mm',
                     format: 'a4',
                     orientation: 'portrait'
                 },
-                pagebreak: { mode: 'avoid-all' }
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
             };
 
-            html2pdf().set(opt).from(element).save().then(() => {
-                buttons.style.display = 'flex';
-                wrapper.style.width = '';
-                wrapper.style.minHeight = '';
-            }).catch((err) => {
+            try {
+                await html2pdf().set(opt).from(element).save();
+            } catch (err) {
                 console.error(err);
-                buttons.style.display = 'flex';
-                wrapper.style.width = '';
-                wrapper.style.minHeight = '';
                 alert('حدث خطأ أثناء تحميل PDF، يرجى المحاولة مرة أخرى');
-            });
+            } finally {
+                buttons.style.display = 'flex';
+            }
         }
 
         loadRecords();
