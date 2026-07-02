@@ -259,41 +259,54 @@
             justify-content: center;
         }
 
-        .flower-left,
-        .flower-right {
-            position: absolute;
-            top: 0;
-            width: 50%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            padding: 0 12px;
-        }
-
-        .flower-left {
-            left: 0;
-            justify-content: flex-start;
-        }
-        .flower-right {
-            right: 0;
-            justify-content: flex-end;
-        }
-
-        .blue-flower {
-            width: 24px;
-            height: 24px;
-            position: relative;
-        }
-
-        .blue-flower::before {
-            content: '❀';
-            color: #4a8fc5;
-            font-size: 20px;
+        /* الشعار في الزاوية اليسرى العليا - الجديد */
+        .top-left-logo {
             position: absolute;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            left: 12px;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #f5f0e6;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .top-left-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* الشعار في الزاوية اليمنى العليا - الجديد (بدل الزهور) */
+        .top-right-logo {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #f5f0e6;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .top-right-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .center-logo {
@@ -327,6 +340,12 @@
             content: '💧';
             font-size: 26px;
             filter: brightness(1.5);
+        }
+
+        /* إزالة الزهور القديمة */
+        .flower-left,
+        .flower-right {
+            display: none;
         }
 
         /* ===== المحتوى ===== */
@@ -419,7 +438,7 @@
             margin-bottom: 2px;
         }
 
-        /* ===== الجدول ===== */
+        /* ===== الجدول - خطوط كبيرة وواضحة ===== */
         .data-table {
             width: 100%;
             border-collapse: separate;
@@ -433,19 +452,20 @@
         .data-table th {
             background: linear-gradient(180deg, #b8941f, #9a7b1a);
             color: white;
-            padding: 14px 8px;
-            font-size: 20px;
+            padding: 16px 10px;
+            font-size: 22px;
             font-weight: 900;
             border: 1px solid #9a7b1a;
+            text-align: center;
         }
 
         .data-table td {
             background: linear-gradient(180deg, #d4af37, #b8941f);
-            padding: 16px 8px;
+            padding: 18px 10px;
             text-align: center;
-            font-size: 20px;
+            font-size: 22px;
             color: #1e1e1e;
-            font-weight: 800;
+            font-weight: 900;
             border: 1px solid #c9a227;
         }
 
@@ -486,7 +506,7 @@
 
         .summary-box .label {
             color: #1e3a5c;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 900;
             display: block;
             margin-bottom: 5px;
@@ -494,7 +514,7 @@
 
         .summary-box .value {
             color: #1e1e1e;
-            font-size: 30px;
+            font-size: 32px;
             font-weight: 900;
         }
 
@@ -518,21 +538,24 @@
             border-left: 3px solid #b8941f;
         }
 
-        .al-harisi-logo {
-            width: 100px;
-            height: 100px;
-            position: relative;
-            margin-bottom: 6px;
+        /* شعار الحريصي الجديد - تحت اسم الحريصي */
+        .harisi-logo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #b8941f;
+            margin-bottom: 8px;
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .al-harisi-logo img {
+        .harisi-logo img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            border-radius: 50%;
+            object-fit: cover;
         }
 
         .contact-left .name {
@@ -570,23 +593,25 @@
         }
 
         .note-text {
-            font-size: 16px;
+            font-size: 18px;
             line-height: 1.7;
             text-align: center;
             font-weight: 700;
         }
 
-        /* ===== التذييل ===== */
+        /* ===== التذييل - السطر الإنجليزي ===== */
         .footer {
             background: linear-gradient(180deg, #c9a227, #a8841f);
-            padding: 16px;
+            padding: 18px;
             text-align: center;
             color: #1e1e1e;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 900;
             margin-top: 15px;
             border-radius: 6px;
             letter-spacing: 1px;
+            width: 100%;
+            clear: both;
         }
 
         /* ===== الزخارف ===== */
@@ -730,16 +755,16 @@
 
             .data-table th,
             .data-table td {
-                font-size: 15px;
-                padding: 10px 4px;
+                font-size: 16px;
+                padding: 12px 4px;
             }
 
             .summary-box .label {
-                font-size: 13px;
+                font-size: 14px;
             }
 
             .summary-box .value {
-                font-size: 20px;
+                font-size: 22px;
             }
 
             .contact-left {
@@ -747,7 +772,7 @@
                 padding: 10px 6px;
             }
 
-            .al-harisi-logo {
+            .harisi-logo {
                 width: 60px;
                 height: 60px;
             }
@@ -765,12 +790,12 @@
             }
 
             .note-text {
-                font-size: 13px;
+                font-size: 14px;
             }
 
             .footer {
-                font-size: 13px;
-                padding: 10px;
+                font-size: 14px;
+                padding: 12px;
             }
 
             .left-shield {
@@ -782,6 +807,20 @@
                 height: 45px;
                 font-size: 20px;
                 top: 8px;
+                right: 8px;
+            }
+
+            .top-left-logo,
+            .top-right-logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            .top-left-logo {
+                left: 8px;
+            }
+
+            .top-right-logo {
                 right: 8px;
             }
 
@@ -806,21 +845,6 @@
 
             .center-logo-inner::before {
                 font-size: 18px;
-            }
-
-            .blue-flower {
-                width: 16px;
-                height: 16px;
-            }
-
-            .blue-flower::before {
-                font-size: 14px;
-            }
-
-            .flower-left,
-            .flower-right {
-                gap: 2px;
-                padding: 0 5px;
             }
 
             .receipt-buttons button {
@@ -850,7 +874,7 @@
                 display: none;
             }
 
-            .al-harisi-logo {
+            .harisi-logo {
                 width: 50px;
                 height: 50px;
                 margin: 0;
@@ -977,24 +1001,16 @@
             <div class="receipt-inner">
                 <!-- البانر العلوي -->
                 <div class="top-banner">
-                    <div class="flower-left">
-                        <span class="blue-flower"></span>
-                        <span class="blue-flower"></span>
-                        <span class="blue-flower"></span>
-                        <span class="blue-flower"></span>
-                        <span class="blue-flower"></span>
-                        <span class="blue-flower"></span>
-                        <span class="blue-flower"></span>
+                    <!-- الشعار الجديد في الزاوية اليسرى -->
+                    <div class="top-left-logo">
+                        <img src="https://i.ibb.co/ksWSDR71/1782980542890.png" alt="شعار الزاوية اليسرى">
                     </div>
-                    <div class="flower-right">
-                        <span class="blue-flower"></span>
-                        <span class="blue-flower"></span>
-                        <span class="blue-flower"></span>
-                        <span class="blue-flower"></span>
-                        <span class="blue-flower"></span>
-                        <span class="blue-flower"></span>
-                        <span class="blue-flower"></span>
+
+                    <!-- الشعار الجديد في الزاوية اليمنى (بدل الزهور) -->
+                    <div class="top-right-logo">
+                        <img src="https://i.ibb.co/pBLypmxZ/1782979766389.jpg" alt="شعار الزاوية اليمنى">
                     </div>
+
                     <div class="center-logo">
                         <div class="center-logo-inner"></div>
                     </div>
@@ -1031,7 +1047,7 @@
                         </thead>
                         <tbody id="receiptTableBody">
                             <tr>
-                                <td colspan="5" style="font-size:20px;padding:20px;">لا توجد سجلات</td>
+                                <td colspan="5" style="font-size:22px;padding:25px;font-weight:900;">لا توجد سجلات</td>
                             </tr>
                         </tbody>
                     </table>
@@ -1059,8 +1075,9 @@
 
                     <div class="contact-section">
                         <div class="contact-left">
-                            <div class="al-harisi-logo">
-                                <img src="https://i.ibb.co/j9rVs5LL/Screenshot.png" alt="شعار الحريصي">
+                            <!-- شعار الحريصي الجديد -->
+                            <div class="harisi-logo">
+                                <img src="https://i.ibb.co/bgV1Z7Px/2354.png" alt="شعار الحريصي">
                             </div>
                             <div class="name">الحريصي</div>
                             <div class="line"></div>
@@ -1075,6 +1092,7 @@
                         </div>
                     </div>
 
+                    <!-- التذييل - السطر الإنجليزي في الأسفل -->
                     <div class="footer">
                         This receipt is intended for proof of payment only.
                     </div>
@@ -1213,15 +1231,15 @@
             });
 
             if (records.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" style="font-size:20px;padding:25px;font-weight:800;">لا توجد سجلات</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="5" style="font-size:22px;padding:25px;font-weight:900;">لا توجد سجلات</td></tr>';
             } else {
                 tbody.innerHTML = records.map(r => `
                         <tr>
-                            <td style="font-size:20px;font-weight:900;">${r.name}</td>
-                            <td style="font-size:20px;font-weight:900;">${r.date}</td>
-                            <td style="font-size:20px;font-weight:900;">${r.responses}</td>
-                            <td style="font-size:20px;font-weight:900;">${r.amount} ريال</td>
-                            <td style="font-size:20px;font-weight:900;">${r.day}</td>
+                            <td style="font-size:22px;font-weight:900;padding:16px 10px;">${r.name}</td>
+                            <td style="font-size:22px;font-weight:900;padding:16px 10px;">${r.date}</td>
+                            <td style="font-size:22px;font-weight:900;padding:16px 10px;">${r.responses}</td>
+                            <td style="font-size:22px;font-weight:900;padding:16px 10px;">${r.amount} ريال</td>
+                            <td style="font-size:22px;font-weight:900;padding:16px 10px;">${r.day}</td>
                         </tr>
                     `).join('');
             }
