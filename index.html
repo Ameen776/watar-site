@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>نظام فواتير المياه</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js">
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600;700;800;900&display=swap');
 
@@ -122,10 +123,21 @@
             letter-spacing: 1px;
         }
 
-        .btn-submit { background: linear-gradient(135deg, #e94560, #c73e54); }
-        .btn-view { background: linear-gradient(135deg, #0f3460, #16213e); }
-        .btn-pdf { background: linear-gradient(135deg, #28a745, #1e7e34); }
-        .btn-back { background: linear-gradient(135deg, #6c757d, #495057); }
+        .btn-submit {
+            background: linear-gradient(135deg, #e94560, #c73e54);
+        }
+
+        .btn-view {
+            background: linear-gradient(135deg, #0f3460, #16213e);
+        }
+
+        .btn-pdf {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+        }
+
+        .btn-back {
+            background: linear-gradient(135deg, #6c757d, #495057);
+        }
 
         .btn-submit:hover,
         .btn-view:hover,
@@ -268,10 +280,9 @@
             gap: 4px;
         }
 
-        .top-left-logo img {
+        .top-left-logo svg {
             width: 65px;
             height: 65px;
-            object-fit: contain;
             border-radius: 8px;
             border: 2px solid #f5f0e6;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -304,10 +315,9 @@
             gap: 4px;
         }
 
-        .top-right-logo img {
+        .top-right-logo svg {
             width: 65px;
             height: 65px;
-            object-fit: contain;
             border-radius: 8px;
             border: 2px solid #f5f0e6;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -436,8 +446,12 @@
             border: 2px solid #c9a227;
         }
 
-        .corner-top { top: -9px; }
-        .corner-bottom { bottom: -9px; }
+        .corner-top {
+            top: -9px;
+        }
+        .corner-bottom {
+            bottom: -9px;
+        }
 
         .summary-box .label {
             color: #1e3a5c;
@@ -472,15 +486,14 @@
             border-left: 3px solid #b8941f;
         }
 
-        .contact-left img {
+        .contact-left svg {
             width: 100px;
             height: 100px;
-            object-fit: contain;
             margin-bottom: 8px;
             background: white;
             border-radius: 50%;
             border: 3px solid #b8941f;
-            padding: 5px;
+            padding: 8px;
         }
 
         .contact-right {
@@ -555,7 +568,9 @@
             flex-direction: column;
         }
 
-        .loading-overlay.active { display: flex; }
+        .loading-overlay.active {
+            display: flex;
+        }
 
         .loading-spinner {
             width: 60px;
@@ -568,8 +583,12 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .loading-text {
@@ -600,8 +619,13 @@
             color: white;
         }
 
-        .receipt-buttons .btn-pdf { background: linear-gradient(135deg, #28a745, #1e7e34); }
-        .receipt-buttons .btn-back { background: linear-gradient(135deg, #6c757d, #495057); }
+        .receipt-buttons .btn-pdf {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+        }
+
+        .receipt-buttons .btn-back {
+            background: linear-gradient(135deg, #6c757d, #495057);
+        }
 
         .receipt-buttons button:hover {
             transform: translateY(-3px);
@@ -609,25 +633,74 @@
         }
 
         @media screen and (max-width: 750px) {
-            .receipt-wrapper { width: 100%; padding: 3mm; }
-            .content { padding: 10px 12px; }
-            .main-title { font-size: 28px; }
-            .project-location { font-size: 16px; }
-            .date-line, .time-line { font-size: 15px; }
-            .data-table th, .data-table td { font-size: 16px; padding: 12px 4px; }
-            .summary-box .label { font-size: 14px; }
-            .summary-box .value { font-size: 22px; }
-            .contact-left { width: 100px; padding: 10px 6px; }
-            .contact-left img { width: 70px; height: 70px; }
-            .phone-line { font-size: 16px; }
-            .note-title { font-size: 15px; }
-            .note-text { font-size: 14px; }
-            .footer { font-size: 16px; padding: 14px; }
-            .top-banner { height: 75px; }
-            .center-logo { width: 50px; height: 50px; font-size: 22px; }
-            .receipt-buttons button { font-size: 1.1rem; padding: 14px; }
-            .summary-boxes { flex-direction: column; gap: 8px; }
-            .contact-section { flex-direction: column; }
+            .receipt-wrapper {
+                width: 100%;
+                padding: 3mm;
+            }
+            .content {
+                padding: 10px 12px;
+            }
+            .main-title {
+                font-size: 28px;
+            }
+            .project-location {
+                font-size: 16px;
+            }
+            .date-line,
+            .time-line {
+                font-size: 15px;
+            }
+            .data-table th,
+            .data-table td {
+                font-size: 16px;
+                padding: 12px 4px;
+            }
+            .summary-box .label {
+                font-size: 14px;
+            }
+            .summary-box .value {
+                font-size: 22px;
+            }
+            .contact-left {
+                width: 100px;
+                padding: 10px 6px;
+            }
+            .contact-left svg {
+                width: 70px;
+                height: 70px;
+            }
+            .phone-line {
+                font-size: 16px;
+            }
+            .note-title {
+                font-size: 15px;
+            }
+            .note-text {
+                font-size: 14px;
+            }
+            .footer {
+                font-size: 16px;
+                padding: 14px;
+            }
+            .top-banner {
+                height: 75px;
+            }
+            .center-logo {
+                width: 50px;
+                height: 50px;
+                font-size: 22px;
+            }
+            .receipt-buttons button {
+                font-size: 1.1rem;
+                padding: 14px;
+            }
+            .summary-boxes {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .contact-section {
+                flex-direction: column;
+            }
             .contact-left {
                 width: 100%;
                 border-left: none;
@@ -636,20 +709,52 @@
                 padding: 10px;
                 gap: 15px;
             }
-            .contact-left img { width: 60px; height: 60px; margin: 0; }
-            .top-left-logo img, .top-right-logo img { width: 40px; height: 40px; }
-            .top-left-logo p, .top-right-logo p { font-size: 8px; }
-            .record-item { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .record-info span { display: block; margin: 3px 0; }
+            .contact-left svg {
+                width: 60px;
+                height: 60px;
+                margin: 0;
+            }
+            .top-left-logo svg,
+            .top-right-logo svg {
+                width: 40px;
+                height: 40px;
+            }
+            .top-left-logo p,
+            .top-right-logo p {
+                font-size: 8px;
+            }
+            .record-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .record-info span {
+                display: block;
+                margin: 3px 0;
+            }
         }
 
         @media print {
-            body { background: white; }
-            #controlSection { display: none !important; }
-            #receiptSection { display: block !important; position: static; }
-            .receipt-buttons { display: none !important; }
-            .receipt-wrapper { padding: 0; width: 100%; }
-            .loading-overlay { display: none !important; }
+            body {
+                background: white;
+            }
+            #controlSection {
+                display: none !important;
+            }
+            #receiptSection {
+                display: block !important;
+                position: static;
+            }
+            .receipt-buttons {
+                display: none !important;
+            }
+            .receipt-wrapper {
+                padding: 0;
+                width: 100%;
+            }
+            .loading-overlay {
+                display: none !important;
+            }
         }
     </style>
 </head>
@@ -734,14 +839,32 @@
         <div class="receipt-wrapper" id="receipt">
             <div class="receipt-inner">
                 <div class="top-banner">
+
+                    <!-- الشعار الأيسر: خدمة عملاء -->
                     <div class="top-left-logo">
-                        <img id="logoLeft" src="" alt="شعار 1" crossorigin="anonymous">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="5" y="5" width="90" height="90" rx="15" fill="#1a4a6e" stroke="#d4af37" stroke-width="3"/>
+                            <rect x="20" y="20" width="60" height="60" rx="8" fill="white" opacity="0.15"/>
+                            <text x="50" y="42" text-anchor="middle" font-size="16" fill="white" font-weight="bold">خدمة</text>
+                            <text x="50" y="62" text-anchor="middle" font-size="14" fill="#d4af37" font-weight="bold">عملاء</text>
+                            <circle cx="50" cy="22" r="8" fill="#d4af37" opacity="0.3"/>
+                            <circle cx="50" cy="22" r="4" fill="#d4af37"/>
+                            <path d="M30 78 L70 78" stroke="#d4af37" stroke-width="2" opacity="0.5"/>
+                        </svg>
                         <p>خدمة عملاء<br>لتعبئة السيارات</p>
                     </div>
+
+                    <!-- الشعار الأيمن: تعبئة مياه -->
                     <div class="top-right-logo">
-                        <img id="logoRight" src="" alt="شعار 2" crossorigin="anonymous">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#4a90d9" stroke="#2a5a8a" stroke-width="2"/>
+                            <path d="M50 15 C50 15 25 50 25 65 C25 78 35 88 50 88 C65 88 75 78 75 65 C75 50 50 15 50 15Z" fill="white" opacity="0.25"/>
+                            <text x="50" y="58" text-anchor="middle" font-size="32" fill="white">💧</text>
+                            <circle cx="50" cy="35" r="5" fill="white" opacity="0.2"/>
+                        </svg>
                         <p>تعبئة مياه</p>
                     </div>
+
                     <div class="center-logo">💧</div>
                 </div>
                 <div class="content">
@@ -789,7 +912,15 @@
                     </div>
                     <div class="contact-section">
                         <div class="contact-left">
-                            <img id="logoHarisi" src="" alt="شعار الحريصي" crossorigin="anonymous">
+                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="45" fill="#d4af37" stroke="#8b6914" stroke-width="2"/>
+                                <text x="50" y="42" text-anchor="middle" font-size="16" fill="#1a1a2e" font-weight="900">الحريصي</text>
+                                <text x="50" y="60" text-anchor="middle" font-size="11" fill="#1a1a2e" font-weight="700">للمياه</text>
+                                <path d="M25 72 L75 72" stroke="#8b6914" stroke-width="2"/>
+                                <circle cx="50" cy="28" r="6" fill="#1a4a6e" opacity="0.2"/>
+                                <circle cx="50" cy="28" r="3" fill="#1a4a6e"/>
+                                <path d="M40 80 Q50 88 60 80" stroke="#8b6914" stroke-width="2" fill="none"/>
+                            </svg>
                         </div>
                         <div class="contact-right">
                             <div class="phone-line">☎️ للتواصل تليفون: 0537024664</div>
@@ -815,64 +946,6 @@
 
     <script>
         document.getElementById('date').valueAsDate = new Date();
-
-        // تعريف الصور كـ Base64 مباشرة (مضمنة في الكود)
-        // هذه الصور تم تحويلها مسبقاً لضمان ظهورها دائماً
-        const embeddedImages = {
-            logoLeft: null,
-            logoRight: null,
-            logoHarisi: null
-        };
-
-        // دالة تحميل الصور وتحويلها إلى Base64 باستخدام fetch مع proxy
-        async function loadImageAsBase64(url) {
-            try {
-                // محاولة التحميل المباشر أولاً
-                const response = await fetch(url, { mode: 'cors' });
-                const blob = await response.blob();
-                return new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onloadend = () => resolve(reader.result);
-                    reader.onerror = reject;
-                    reader.readAsDataURL(blob);
-                });
-            } catch (error) {
-                console.warn('فشل التحميل المباشر، محاولة استخدام proxy:', error);
-                // استخدام CORS proxy كخطة بديلة
-                const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
-                const response = await fetch(proxyUrl);
-                const blob = await response.blob();
-                return new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onloadend = () => resolve(reader.result);
-                    reader.onerror = reject;
-                    reader.readAsDataURL(blob);
-                });
-            }
-        }
-
-        // تحميل جميع الصور عند بدء التشغيل
-        async function preloadImages() {
-            const images = [
-                { key: 'logoLeft', url: 'https://i.ibb.co/pBLypmxZ/1782979766389.jpg' },
-                { key: 'logoRight', url: 'https://i.ibb.co/ksWSDR71/1782980542890.png' },
-                { key: 'logoHarisi', url: 'https://i.ibb.co/bgV1Z7Px/2354.png' }
-            ];
-
-            for (const img of images) {
-                try {
-                    const base64 = await loadImageAsBase64(img.url);
-                    embeddedImages[img.key] = base64;
-                    // تحديث الصورة في الواجهة
-                    const imgElement = document.getElementById(img.key);
-                    if (imgElement) {
-                        imgElement.src = base64;
-                    }
-                } catch (error) {
-                    console.error('فشل تحميل الصورة:', img.key, error);
-                }
-            }
-        }
 
         function calculateTotal() {
             const responses = parseInt(document.getElementById('responses').value) || 0;
@@ -963,9 +1036,7 @@
             loadRecords();
         }
 
-        async function showReceipt() {
-            // التأكد من تحميل الصور أولاً
-            await ensureImagesLoaded();
+        function showReceipt() {
             updateReceiptData();
             document.getElementById('controlSection').style.display = 'none';
             document.getElementById('receiptSection').style.display = 'block';
@@ -984,7 +1055,8 @@
             const tbody = document.getElementById('receiptTableBody');
 
             const now = new Date();
-            document.getElementById('issueTime').textContent = 'الوقت: ' + now.toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('issueTime').textContent = 'الوقت: ' + now.toLocaleTimeString('ar-SA', { hour: '2-digit',
+                    minute: '2-digit' });
             document.getElementById('issueDate').textContent = 'تاريخ الإصدار: ' + now.toLocaleDateString('ar-SA', {
                 weekday: 'long',
                 year: 'numeric',
@@ -1012,17 +1084,6 @@
             document.getElementById('totalAmount').textContent = records.reduce((s, r) => s + r.amount, 0) + ' ريال';
         }
 
-        // التأكد من تحميل الصور قبل العرض
-        async function ensureImagesLoaded() {
-            if (!embeddedImages.logoLeft || !embeddedImages.logoRight || !embeddedImages.logoHarisi) {
-                await preloadImages();
-            }
-            // تحديث الصور في الواجهة
-            document.getElementById('logoLeft').src = embeddedImages.logoLeft || '';
-            document.getElementById('logoRight').src = embeddedImages.logoRight || '';
-            document.getElementById('logoHarisi').src = embeddedImages.logoHarisi || '';
-        }
-
         async function downloadPDF() {
             const loadingOverlay = document.getElementById('loadingOverlay');
             const buttons = document.querySelector('.receipt-buttons');
@@ -1031,12 +1092,6 @@
             buttons.style.display = 'none';
 
             try {
-                // التأكد من تحميل الصور كـ Base64
-                await ensureImagesLoaded();
-
-                // انتظار قصير للتأكد من تحديث DOM
-                await new Promise(resolve => setTimeout(resolve, 800));
-
                 const element = document.getElementById('receipt');
 
                 const opt = {
@@ -1052,19 +1107,6 @@
                         windowWidth: element.scrollWidth,
                         windowHeight: element.scrollHeight,
                         logging: false,
-                        onclone: function(clonedDoc) {
-                            // التأكد من أن الصور في النسخة المستنسخة تستخدم Base64
-                            const clonedImages = clonedDoc.querySelectorAll('img');
-                            clonedImages.forEach(img => {
-                                if (img.id === 'logoLeft' && embeddedImages.logoLeft) {
-                                    img.src = embeddedImages.logoLeft;
-                                } else if (img.id === 'logoRight' && embeddedImages.logoRight) {
-                                    img.src = embeddedImages.logoRight;
-                                } else if (img.id === 'logoHarisi' && embeddedImages.logoHarisi) {
-                                    img.src = embeddedImages.logoHarisi;
-                                }
-                            });
-                        }
                     },
                     jsPDF: {
                         unit: 'mm',
@@ -1085,8 +1127,6 @@
             }
         }
 
-        // بدء التحميل المسبق للصور
-        preloadImages();
         loadRecords();
     </script>
 </body>
