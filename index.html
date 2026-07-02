@@ -111,15 +111,16 @@
         .btn-pdf,
         .btn-back {
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             border: none;
-            border-radius: 10px;
-            font-size: 1.2rem;
+            border-radius: 12px;
+            font-size: 1.4rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-            margin-top: 10px;
+            margin-top: 12px;
             color: white;
+            letter-spacing: 1px;
         }
 
         .btn-submit {
@@ -143,7 +144,7 @@
         .btn-pdf:hover,
         .btn-back:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
         .success-msg {
@@ -154,6 +155,7 @@
             margin-bottom: 20px;
             display: none;
             text-align: center;
+            font-size: 1.2rem;
         }
 
         .records-section {
@@ -211,7 +213,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: #5c3a1e;
+            background: #3d2b1a;
             z-index: 9999;
             overflow-y: auto;
             overflow-x: hidden;
@@ -221,14 +223,14 @@
             height: 100vh;
         }
 
-        /* تصميم الفاتورة بحجم مناسب للطباعة */
+        /* تصميم الفاتورة بحجم كبير */
         .receipt-wrapper {
-            width: 210mm;
-            min-height: 297mm;
-            max-width: 100%;
+            width: 100%;
+            max-width: 900px;
+            min-height: 100vh;
             margin: 0 auto;
             background: linear-gradient(180deg, #6b4423 0%, #4a2e15 100%);
-            padding: 5mm;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -236,17 +238,19 @@
 
         .receipt-inner {
             background: #f5f0e6;
-            border-radius: 4px;
+            border-radius: 8px;
             overflow: hidden;
             position: relative;
             width: 100%;
             flex: 1;
-            min-height: 287mm;
+            min-height: calc(100vh - 30px);
+            padding-bottom: 10px;
         }
 
+        /* ===== البانر العلوي مع الشعار ===== */
         .top-banner {
-            height: 70px;
-            background: linear-gradient(180deg, #1e4a6e 0%, #0d2d4a 100%);
+            height: 100px;
+            background: linear-gradient(180deg, #1a4a6e 0%, #0d2d4a 100%);
             position: relative;
             display: flex;
             align-items: center;
@@ -261,8 +265,8 @@
             height: 100%;
             display: flex;
             align-items: center;
-            gap: 3px;
-            padding: 0 10px;
+            gap: 6px;
+            padding: 0 15px;
         }
 
         .flower-left {
@@ -275,15 +279,15 @@
         }
 
         .blue-flower {
-            width: 22px;
-            height: 22px;
+            width: 30px;
+            height: 30px;
             position: relative;
         }
 
         .blue-flower::before {
             content: '❀';
-            color: #4a7fb5;
-            font-size: 18px;
+            color: #4a8fc5;
+            font-size: 26px;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -296,20 +300,20 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #c9a227, #a8841f);
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, #d4af37, #a8841f);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 3px solid #f5f0e6;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+            border: 4px solid #f5f0e6;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
 
         .center-logo-inner {
-            width: 45px;
-            height: 45px;
+            width: 65px;
+            height: 65px;
             background: linear-gradient(180deg, #2a7ab8, #1a5a8a);
             border-radius: 50%;
             display: flex;
@@ -319,29 +323,31 @@
 
         .center-logo-inner::before {
             content: '💧';
-            font-size: 22px;
+            font-size: 32px;
             filter: brightness(1.5);
         }
 
+        /* ===== المحتوى ===== */
         .content {
-            padding: 12px 20px 0;
+            padding: 20px 30px 10px;
             position: relative;
-            min-height: calc(287mm - 70px);
+            min-height: calc(100vh - 130px);
         }
 
+        /* الشعار الأيسر - ظاهر الآن */
         .left-shield {
             position: absolute;
-            top: 12px;
-            left: 15px;
+            top: 15px;
+            left: 20px;
             text-align: center;
             z-index: 5;
         }
 
         .shield-icon {
-            width: 70px;
-            height: 80px;
+            width: 100px;
+            height: 110px;
             position: relative;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -354,159 +360,166 @@
         }
 
         .left-shield p {
-            font-size: 10px;
+            font-size: 14px;
             color: #1e4a6e;
             font-weight: bold;
-            line-height: 1.4;
+            line-height: 1.6;
         }
 
+        /* الصنبور الأيمن */
         .faucet {
             position: absolute;
-            top: 12px;
-            right: 15px;
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(135deg, #c0c0c0, #a0a0a0);
+            top: 15px;
+            right: 20px;
+            width: 75px;
+            height: 75px;
+            background: linear-gradient(135deg, #d0d0d0, #a0a0a0);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid #c9a227;
-            font-size: 26px;
+            border: 3px solid #d4af37;
+            font-size: 36px;
             z-index: 5;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
 
+        /* ===== العنوان ===== */
         .header-info {
             text-align: center;
-            margin-top: 8px;
-            margin-bottom: 12px;
-            padding-top: 6px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+            padding-top: 10px;
         }
 
         .main-title {
             color: #b8941f;
-            font-size: 32px;
+            font-size: 48px;
             font-weight: 900;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
-            margin-bottom: 6px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
         }
 
         .project-location {
             color: #b8941f;
-            font-size: 16px;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
         }
 
         .date-line,
         .time-line {
             color: #1e4a6e;
-            font-size: 16px;
+            font-size: 22px;
             font-weight: 800;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
+        /* ===== الجدول ===== */
         .data-table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            margin: 12px 0;
-            border: 2px solid #b8941f;
-            border-radius: 4px;
+            margin: 20px 0;
+            border: 3px solid #b8941f;
+            border-radius: 8px;
             overflow: hidden;
         }
 
         .data-table th {
             background: linear-gradient(180deg, #b8941f, #9a7b1a);
             color: white;
-            padding: 12px 6px;
-            font-size: 14px;
-            font-weight: 800;
+            padding: 18px 10px;
+            font-size: 22px;
+            font-weight: 900;
             border: 1px solid #9a7b1a;
         }
 
         .data-table td {
             background: linear-gradient(180deg, #d4af37, #b8941f);
-            padding: 14px 4px;
+            padding: 20px 8px;
             text-align: center;
-            font-size: 14px;
+            font-size: 22px;
             color: #1e1e1e;
-            font-weight: 700;
+            font-weight: 800;
             border: 1px solid #c9a227;
         }
 
+        /* ===== المربعات السفلية ===== */
         .summary-boxes {
             display: flex;
-            gap: 6px;
-            margin: 10px 0;
+            gap: 12px;
+            margin: 20px 0;
         }
 
         .summary-box {
             flex: 1;
             background: linear-gradient(180deg, #f4d03f, #d4af37, #b8941f);
-            border: 2px solid #8b6914;
-            border-radius: 6px;
-            padding: 12px 6px;
+            border: 3px solid #8b6914;
+            border-radius: 10px;
+            padding: 20px 10px;
             text-align: center;
             position: relative;
         }
 
         .summary-box .corner-dot {
             position: absolute;
-            width: 12px;
-            height: 12px;
+            width: 18px;
+            height: 18px;
             background: linear-gradient(135deg, #1e4a6e, #0d2d4a);
             border-radius: 50%;
             left: 50%;
             transform: translateX(-50%);
-            border: 1px solid #c9a227;
+            border: 2px solid #c9a227;
         }
 
         .corner-top {
-            top: -6px;
+            top: -9px;
         }
         .corner-bottom {
-            bottom: -6px;
+            bottom: -9px;
         }
 
         .summary-box .label {
             color: #1e3a5c;
-            font-size: 12px;
-            font-weight: 800;
+            font-size: 20px;
+            font-weight: 900;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
         }
 
         .summary-box .value {
             color: #1e1e1e;
-            font-size: 22px;
+            font-size: 36px;
             font-weight: 900;
         }
 
+        /* ===== قسم التواصل ===== */
         .contact-section {
             display: flex;
-            margin: 10px 0 0;
-            border: 2px solid #b8941f;
-            border-radius: 6px;
+            margin: 20px 0 0;
+            border: 3px solid #b8941f;
+            border-radius: 10px;
             overflow: hidden;
         }
 
         .contact-left {
-            width: 110px;
+            width: 160px;
             background: #f0ebe0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 12px 6px;
-            border-left: 2px solid #b8941f;
+            padding: 15px 10px;
+            border-left: 3px solid #b8941f;
         }
 
         .al-harisi-logo {
-            width: 85px;
-            height: 85px;
+            width: 120px;
+            height: 120px;
             position: relative;
-            margin-bottom: 6px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -520,103 +533,107 @@
         }
 
         .contact-left .name {
-            font-size: 18px;
+            font-size: 28px;
             color: #b8941f;
             font-weight: 900;
         }
 
         .contact-left .line {
-            width: 60px;
-            height: 2px;
+            width: 80px;
+            height: 3px;
             background: #b8941f;
-            margin: 3px 0;
+            margin: 5px 0;
         }
 
         .contact-right {
             flex: 1;
             background: linear-gradient(180deg, #c9a227, #a8841f);
-            padding: 14px 16px;
+            padding: 20px 25px;
             color: #1e1e1e;
         }
 
         .phone-line {
-            font-size: 18px;
+            font-size: 28px;
             font-weight: 900;
-            margin-bottom: 6px;
+            margin-bottom: 10px;
             text-align: center;
         }
 
         .note-title {
-            font-size: 16px;
+            font-size: 24px;
             font-weight: 900;
-            margin-bottom: 6px;
+            margin-bottom: 10px;
             text-align: center;
         }
 
         .note-text {
-            font-size: 12px;
-            line-height: 1.6;
+            font-size: 20px;
+            line-height: 1.8;
             text-align: center;
             font-weight: 700;
         }
 
+        /* ===== التذييل ===== */
         .footer {
             background: linear-gradient(180deg, #c9a227, #a8841f);
-            padding: 12px;
+            padding: 20px;
             text-align: center;
             color: #1e1e1e;
-            font-size: 12px;
-            font-weight: 800;
-            margin-top: 10px;
+            font-size: 22px;
+            font-weight: 900;
+            margin-top: 20px;
+            border-radius: 6px;
+            letter-spacing: 1px;
         }
 
+        /* ===== الزخارف الجانبية ===== */
         .pen-decoration {
             position: absolute;
-            bottom: 10px;
-            left: -8px;
-            width: 30px;
-            height: 140px;
+            bottom: 20px;
+            left: -12px;
+            width: 40px;
+            height: 180px;
             background: linear-gradient(90deg, #0a0a0a 0%, #2a2a2a 25%, #0a0a0a 50%, #2a2a2a 75%, #0a0a0a 100%);
-            border-radius: 3px;
+            border-radius: 4px;
             transform: rotate(-15deg);
             z-index: 5;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.6);
         }
 
         .pen-decoration::before {
             content: '';
             position: absolute;
-            top: -12px;
+            top: -16px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-top: 16px solid #d4af37;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 22px solid #d4af37;
         }
 
         .pen-decoration::after {
             content: '';
             position: absolute;
-            bottom: -6px;
+            bottom: -8px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-bottom: 10px solid #d4af37;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-bottom: 14px solid #d4af37;
         }
 
         .pen-ring {
             position: absolute;
-            bottom: 40px;
-            left: -6px;
-            width: 26px;
-            height: 6px;
+            bottom: 55px;
+            left: -8px;
+            width: 34px;
+            height: 8px;
             background: linear-gradient(90deg, #d4af37, #b8941f, #d4af37);
-            border-radius: 3px;
+            border-radius: 4px;
             transform: rotate(-15deg);
             z-index: 6;
         }
@@ -626,34 +643,180 @@
             top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 100px;
-            height: 120px;
-            opacity: 0.03;
+            width: 150px;
+            height: 180px;
+            opacity: 0.04;
             pointer-events: none;
             z-index: 1;
         }
 
         .watermark::before {
             content: '💧';
-            font-size: 80px;
+            font-size: 120px;
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
         }
 
+        /* ===== الأزرار في الأسفل ===== */
         .receipt-buttons {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            padding: 0 10px 15px;
-            max-width: 210mm;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 0 15px 20px;
+            max-width: 900px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .receipt-buttons button {
             flex: 1;
+            padding: 20px;
+            font-size: 1.6rem;
+            border-radius: 14px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+        }
+
+        .receipt-buttons .btn-pdf {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+        }
+
+        .receipt-buttons .btn-back {
+            background: linear-gradient(135deg, #6c757d, #495057);
+        }
+
+        .receipt-buttons button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ===== استجابة للشاشات الصغيرة ===== */
+        @media screen and (max-width: 700px) {
+            .content {
+                padding: 15px;
+            }
+
+            .main-title {
+                font-size: 32px;
+            }
+
+            .project-location {
+                font-size: 18px;
+            }
+
+            .date-line,
+            .time-line {
+                font-size: 16px;
+            }
+
+            .data-table th,
+            .data-table td {
+                font-size: 16px;
+                padding: 12px 4px;
+            }
+
+            .summary-box .label {
+                font-size: 14px;
+            }
+
+            .summary-box .value {
+                font-size: 24px;
+            }
+
+            .contact-left {
+                width: 100px;
+            }
+
+            .al-harisi-logo {
+                width: 70px;
+                height: 70px;
+            }
+
+            .contact-left .name {
+                font-size: 18px;
+            }
+
+            .phone-line {
+                font-size: 18px;
+            }
+
+            .note-title {
+                font-size: 16px;
+            }
+
+            .note-text {
+                font-size: 14px;
+            }
+
+            .footer {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .left-shield {
+                display: none;
+            }
+
+            .faucet {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                top: 10px;
+                right: 10px;
+            }
+
+            .pen-decoration,
+            .pen-ring {
+                display: none;
+            }
+
+            .top-banner {
+                height: 70px;
+            }
+
+            .center-logo {
+                width: 55px;
+                height: 55px;
+            }
+
+            .center-logo-inner {
+                width: 40px;
+                height: 40px;
+            }
+
+            .center-logo-inner::before {
+                font-size: 20px;
+            }
+
+            .blue-flower {
+                width: 20px;
+                height: 20px;
+            }
+
+            .blue-flower::before {
+                font-size: 18px;
+            }
+
+            .flower-left,
+            .flower-right {
+                gap: 3px;
+                padding: 0 5px;
+            }
+
+            .receipt-buttons button {
+                font-size: 1.2rem;
+                padding: 15px;
+            }
+
+            .summary-boxes {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
 
         @media print {
@@ -672,7 +835,7 @@
             }
             .receipt-wrapper {
                 padding: 0;
-                width: 100%;
+                max-width: 100%;
                 min-height: auto;
             }
             .receipt-inner {
@@ -680,44 +843,6 @@
             }
             .content {
                 min-height: auto;
-            }
-        }
-
-        @media screen and (max-width: 600px) {
-            .receipt-wrapper {
-                width: 100%;
-                padding: 2mm;
-            }
-            .receipt-inner {
-                min-height: auto;
-            }
-            .content {
-                min-height: auto;
-            }
-            .main-title {
-                font-size: 24px;
-            }
-            .data-table th,
-            .data-table td {
-                font-size: 11px;
-                padding: 8px 3px;
-            }
-            .summary-box .value {
-                font-size: 16px;
-            }
-            .left-shield {
-                display: none;
-            }
-            .faucet {
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
-                top: 8px;
-                right: 8px;
-            }
-            .pen-decoration,
-            .pen-ring {
-                display: none;
             }
         }
     </style>
@@ -808,8 +933,11 @@
     <div id="receiptSection">
         <div class="receipt-wrapper" id="receipt">
             <div class="receipt-inner">
+                <!-- البانر العلوي مع الشعار والزهور -->
                 <div class="top-banner">
                     <div class="flower-left">
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
                         <span class="blue-flower"></span>
                         <span class="blue-flower"></span>
                         <span class="blue-flower"></span>
@@ -822,6 +950,8 @@
                         <span class="blue-flower"></span>
                         <span class="blue-flower"></span>
                         <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
                     </div>
                     <div class="center-logo">
                         <div class="center-logo-inner"></div>
@@ -829,6 +959,7 @@
                 </div>
 
                 <div class="content">
+                    <!-- الشعار الأيسر - أصبح ظاهراً الآن -->
                     <div class="left-shield">
                         <div class="shield-icon">
                             <img src="https://i.ibb.co/RkfmfFjF/Screenshot.png" alt="شعار خدمة عملاء">
@@ -901,10 +1032,12 @@
                         </div>
                     </div>
 
+                    <!-- التذييل - السطر الإنجليزي في الأسفل -->
                     <div class="footer">
                         This receipt is intended for proof of payment only.
                     </div>
 
+                    <!-- الزخارف الجانبية -->
                     <div class="pen-decoration"></div>
                     <div class="pen-ring"></div>
                     <div class="watermark"></div>
@@ -1013,7 +1146,7 @@
             updateReceiptData();
             document.getElementById('controlSection').style.display = 'none';
             document.getElementById('receiptSection').style.display = 'block';
-            document.body.style.background = '#5c3a1e';
+            document.body.style.background = '#3d2b1a';
             window.scrollTo(0, 0);
         }
 
@@ -1029,7 +1162,7 @@
 
             const now = new Date();
             document.getElementById('issueTime').textContent = 'الوقت: ' + now.toLocaleTimeString('ar-SA', { hour: '2-digit',
-                minute: '2-digit' });
+                    minute: '2-digit' });
             document.getElementById('issueDate').textContent = 'تاريخ الإصدار: ' + now.toLocaleDateString('ar-SA', {
                 weekday: 'long',
                 year: 'numeric',
@@ -1062,37 +1195,38 @@
             const buttons = document.querySelector('.receipt-buttons');
             buttons.style.display = 'none';
 
+            // تأكد من ظهور الفاتورة بالكامل
+            const wrapper = document.querySelector('.receipt-wrapper');
+            wrapper.style.maxWidth = '900px';
+            wrapper.style.minHeight = '100vh';
+
             const opt = {
                 margin: 0,
                 filename: 'فاتورة-المياه-' + new Date().toLocaleDateString('ar-SA').replace(/\//g, '-') + '.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: {
-                    scale: 3,
+                    scale: 2.5,
                     useCORS: true,
-                    width: 210 * 3.78, // 210mm to px
-                    height: 297 * 3.78, // 297mm to px
+                    width: 900,
+                    height: wrapper.scrollHeight,
+                    windowHeight: wrapper.scrollHeight,
                 },
                 jsPDF: {
-                    unit: 'mm',
-                    format: 'a4',
+                    unit: 'px',
+                    format: [900, wrapper.scrollHeight],
                     orientation: 'portrait'
                 },
                 pagebreak: { mode: 'avoid-all' }
             };
 
-            // إظهار الفاتورة بشكل كامل قبل التصدير
-            const wrapper = document.querySelector('.receipt-wrapper');
-            wrapper.style.width = '210mm';
-            wrapper.style.minHeight = '297mm';
-
             html2pdf().set(opt).from(element).save().then(() => {
                 buttons.style.display = 'flex';
-                wrapper.style.width = '';
+                wrapper.style.maxWidth = '';
                 wrapper.style.minHeight = '';
             }).catch((err) => {
                 console.error(err);
                 buttons.style.display = 'flex';
-                wrapper.style.width = '';
+                wrapper.style.maxWidth = '';
                 wrapper.style.minHeight = '';
                 alert('حدث خطأ أثناء تحميل PDF، يرجى المحاولة مرة أخرى');
             });
