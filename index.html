@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>نظام فواتير المياه</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600;700;800;900&display=swap');
 
@@ -15,8 +14,7 @@
             box-sizing: border-box;
         }
 
-        html,
-        body {
+        html, body {
             font-family: 'Noto Naskh Arabic', 'Segoe UI', Tahoma, sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
@@ -24,6 +22,7 @@
             overflow-x: hidden;
         }
 
+        /* ===== لوحة التحكم ===== */
         #controlSection {
             padding: 10px;
             min-height: 100vh;
@@ -39,14 +38,14 @@
             color: #e94560;
             font-size: 2rem;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .panel {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255,255,255,0.95);
             border-radius: 20px;
             padding: 25px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             margin-bottom: 20px;
         }
 
@@ -59,24 +58,21 @@
             font-weight: bold;
             color: #16213e;
             margin-bottom: 6px;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
-        input,
-        select {
+        input, select {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             border: 2px solid #ddd;
             border-radius: 10px;
-            font-size: 1.1rem;
-            font-family: 'Noto Naskh Arabic', 'Segoe UI', Tahoma, sans-serif;
+            font-size: 1rem;
         }
 
-        input:focus,
-        select:focus {
+        input:focus, select:focus {
             outline: none;
             border-color: #e94560;
-            box-shadow: 0 0 10px rgba(233, 69, 96, 0.2);
+            box-shadow: 0 0 10px rgba(233,69,96,0.2);
         }
 
         .calculation-box {
@@ -90,37 +86,33 @@
         }
 
         .calculation-box .calc-label {
-            font-size: 16px;
+            font-size: 14px;
             color: #1e3a5c;
             font-weight: 700;
         }
 
         .calculation-box .calc-result {
-            font-size: 32px;
+            font-size: 28px;
             color: #1e1e1e;
             font-weight: 900;
         }
 
         .calculation-box .calc-detail {
-            font-size: 14px;
+            font-size: 12px;
             color: #555;
         }
 
-        .btn-submit,
-        .btn-view,
-        .btn-pdf,
-        .btn-back {
+        .btn-submit, .btn-view, .btn-pdf, .btn-back {
             width: 100%;
-            padding: 18px;
+            padding: 15px;
             border: none;
-            border-radius: 12px;
-            font-size: 1.4rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-            margin-top: 12px;
+            margin-top: 10px;
             color: white;
-            letter-spacing: 1px;
         }
 
         .btn-submit {
@@ -139,12 +131,9 @@
             background: linear-gradient(135deg, #6c757d, #495057);
         }
 
-        .btn-submit:hover,
-        .btn-view:hover,
-        .btn-pdf:hover,
-        .btn-back:hover {
+        .btn-submit:hover, .btn-view:hover, .btn-pdf:hover, .btn-back:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .success-msg {
@@ -155,74 +144,56 @@
             margin-bottom: 20px;
             display: none;
             text-align: center;
-            font-size: 1.2rem;
         }
 
         .records-section {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255,255,255,0.95);
             border-radius: 20px;
             padding: 25px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
         .records-section h2 {
             color: #16213e;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-align: center;
-            font-size: 1.8rem;
         }
 
         .record-item {
             background: #f8f9fa;
             border-radius: 10px;
-            padding: 18px 20px;
-            margin-bottom: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-right: 6px solid #e94560;
-            font-size: 1.2rem;
-        }
-
-        .record-info strong {
-            font-size: 1.3rem;
-            color: #1a1a2e;
-            display: block;
-            margin-bottom: 8px;
+            border-right: 4px solid #e94560;
         }
 
         .record-info span {
             display: inline-block;
-            margin-left: 15px;
-            color: #333;
-            font-size: 1.1rem;
-            font-weight: 600;
+            margin-left: 10px;
+            color: #555;
+            font-size: 13px;
         }
 
         .btn-delete {
             background: #dc3545;
             color: white;
             border: none;
-            padding: 10px 22px;
-            border-radius: 8px;
+            padding: 6px 15px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .btn-delete:hover {
-            background: #c82333;
-            transform: scale(1.05);
+            font-size: 12px;
         }
 
         .empty-msg {
             text-align: center;
             color: #888;
             padding: 20px;
-            font-size: 1.2rem;
         }
 
+        /* ===== الفاتورة - تملأ الشاشة بالكامل ===== */
         #receiptSection {
             display: none;
             position: fixed;
@@ -230,22 +201,23 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: #3d2b1a;
+            background: #5c3a1e;
             z-index: 9999;
             overflow-y: auto;
             overflow-x: hidden;
-            padding: 20px 0;
+            padding: 0;
             margin: 0;
             width: 100vw;
             height: 100vh;
         }
 
         .receipt-wrapper {
-            width: 210mm;
+            width: 100%;
             max-width: 100%;
-            margin: 0 auto;
+            min-height: 100vh;
             background: linear-gradient(180deg, #6b4423 0%, #4a2e15 100%);
-            padding: 5mm;
+            padding: 8px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -257,83 +229,47 @@
             overflow: hidden;
             position: relative;
             width: 100%;
+            flex: 1;
+            min-height: calc(100vh - 16px);
         }
 
         .top-banner {
-            height: 100px;
-            background: linear-gradient(180deg, #1a4a6e 0%, #0d2d4a 100%);
+            height: 70px;
+            background: linear-gradient(180deg, #1e4a6e 0%, #0d2d4a 100%);
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .top-left-logo {
+        .flower-left, .flower-right {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            padding: 0 10px;
+        }
+
+        .flower-left { left: 0; justify-content: flex-start; }
+        .flower-right { right: 0; justify-content: flex-end; }
+
+        .blue-flower {
+            width: 22px;
+            height: 22px;
+            position: relative;
+        }
+
+        .blue-flower::before {
+            content: '❀';
+            color: #4a7fb5;
+            font-size: 18px;
             position: absolute;
             top: 50%;
-            left: 15px;
-            transform: translateY(-50%);
-            z-index: 15;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .top-left-logo svg {
-            width: 65px;
-            height: 65px;
-            border-radius: 8px;
-            border: 2px solid #f5f0e6;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.9);
-            padding: 3px;
-        }
-
-        .top-left-logo p {
-            font-size: 11px;
-            color: #f5f0e6;
-            font-weight: 900;
-            line-height: 1.3;
-            text-align: center;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-            margin: 0;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        .top-right-logo {
-            position: absolute;
-            top: 50%;
-            right: 15px;
-            transform: translateY(-50%);
-            z-index: 15;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .top-right-logo svg {
-            width: 65px;
-            height: 65px;
-            border-radius: 8px;
-            border: 2px solid #f5f0e6;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.9);
-            padding: 3px;
-        }
-
-        .top-right-logo p {
-            font-size: 10px;
-            color: #f5f0e6;
-            font-weight: 900;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-            margin: 0;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 2px 6px;
-            border-radius: 4px;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .center-logo {
@@ -342,200 +278,324 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #d4af37, #a8841f);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #c9a227, #a8841f);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 4px solid #f5f0e6;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            font-size: 30px;
+            border: 3px solid #f5f0e6;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+        }
+
+        .center-logo-inner {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(180deg, #2a7ab8, #1a5a8a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .center-logo-inner::before {
+            content: '💧';
+            font-size: 22px;
+            filter: brightness(1.5);
         }
 
         .content {
-            padding: 15px 25px 20px;
+            padding: 12px 20px 0;
             position: relative;
+            min-height: calc(100vh - 70px);
+        }
+
+        .left-shield {
+            position: absolute;
+            top: 12px;
+            left: 15px;
+            text-align: center;
+            z-index: 5;
+        }
+
+        .shield-icon {
+            width: 70px;
+            height: 80px;
+            position: relative;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shield-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .left-shield p {
+            font-size: 10px;
+            color: #1e4a6e;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        .faucet {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #c0c0c0, #a0a0a0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #c9a227;
+            font-size: 26px;
+            z-index: 5;
         }
 
         .header-info {
             text-align: center;
-            margin-top: 10px;
-            margin-bottom: 18px;
+            margin-top: 8px;
+            margin-bottom: 12px;
+            padding-top: 6px;
         }
 
         .main-title {
             color: #b8941f;
-            font-size: 42px;
+            font-size: 32px;
             font-weight: 900;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
-            margin-bottom: 8px;
-            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+            margin-bottom: 6px;
         }
 
         .project-location {
             color: #b8941f;
-            font-size: 22px;
+            font-size: 16px;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
-        .date-line,
-        .time-line {
+        .date-line, .time-line {
             color: #1e4a6e;
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 800;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
 
         .data-table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            margin: 15px 0;
-            border: 3px solid #b8941f;
-            border-radius: 8px;
+            margin: 12px 0;
+            border: 2px solid #b8941f;
+            border-radius: 4px;
             overflow: hidden;
         }
 
         .data-table th {
             background: linear-gradient(180deg, #b8941f, #9a7b1a);
             color: white;
-            padding: 18px 12px;
-            font-size: 24px;
-            font-weight: 900;
+            padding: 12px 6px;
+            font-size: 14px;
+            font-weight: 800;
             border: 1px solid #9a7b1a;
-            text-align: center;
         }
 
         .data-table td {
             background: linear-gradient(180deg, #d4af37, #b8941f);
-            padding: 20px 12px;
+            padding: 14px 4px;
             text-align: center;
-            font-size: 24px;
+            font-size: 14px;
             color: #1e1e1e;
-            font-weight: 900;
+            font-weight: 700;
             border: 1px solid #c9a227;
         }
 
         .summary-boxes {
             display: flex;
-            gap: 12px;
-            margin: 18px 0;
+            gap: 6px;
+            margin: 10px 0;
         }
 
         .summary-box {
             flex: 1;
             background: linear-gradient(180deg, #f4d03f, #d4af37, #b8941f);
-            border: 3px solid #8b6914;
-            border-radius: 10px;
-            padding: 18px 12px;
+            border: 2px solid #8b6914;
+            border-radius: 6px;
+            padding: 12px 6px;
             text-align: center;
             position: relative;
         }
 
         .summary-box .corner-dot {
             position: absolute;
-            width: 18px;
-            height: 18px;
+            width: 12px;
+            height: 12px;
             background: linear-gradient(135deg, #1e4a6e, #0d2d4a);
             border-radius: 50%;
             left: 50%;
             transform: translateX(-50%);
-            border: 2px solid #c9a227;
+            border: 1px solid #c9a227;
         }
 
-        .corner-top {
-            top: -9px;
-        }
-        .corner-bottom {
-            bottom: -9px;
-        }
+        .corner-top { top: -6px; }
+        .corner-bottom { bottom: -6px; }
 
         .summary-box .label {
             color: #1e3a5c;
-            font-size: 20px;
-            font-weight: 900;
+            font-size: 12px;
+            font-weight: 800;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .summary-box .value {
             color: #1e1e1e;
-            font-size: 36px;
+            font-size: 22px;
             font-weight: 900;
         }
 
         .contact-section {
             display: flex;
-            margin: 18px 0 0;
-            border: 3px solid #b8941f;
-            border-radius: 10px;
+            margin: 10px 0 0;
+            border: 2px solid #b8941f;
+            border-radius: 6px;
             overflow: hidden;
         }
 
         .contact-left {
-            width: 150px;
+            width: 110px;
             background: #f0ebe0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 15px 10px;
-            border-left: 3px solid #b8941f;
+            padding: 12px 6px;
+            border-left: 2px solid #b8941f;
         }
 
-        .contact-left svg {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 8px;
-            background: white;
+        .al-harisi-logo {
+            width: 85px;
+            height: 85px;
+            position: relative;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .al-harisi-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
             border-radius: 50%;
-            border: 3px solid #b8941f;
-            padding: 8px;
+        }
+
+        .contact-left .name {
+            font-size: 18px;
+            color: #b8941f;
+            font-weight: 900;
+        }
+
+        .contact-left .line {
+            width: 60px;
+            height: 2px;
+            background: #b8941f;
+            margin: 3px 0;
         }
 
         .contact-right {
             flex: 1;
             background: linear-gradient(180deg, #c9a227, #a8841f);
-            padding: 18px 20px;
+            padding: 14px 16px;
             color: #1e1e1e;
         }
 
         .phone-line {
-            font-size: 26px;
+            font-size: 18px;
             font-weight: 900;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-align: center;
         }
 
         .note-title {
-            font-size: 22px;
+            font-size: 16px;
             font-weight: 900;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-align: center;
         }
 
         .note-text {
-            font-size: 20px;
-            line-height: 1.8;
+            font-size: 12px;
+            line-height: 1.6;
             text-align: center;
             font-weight: 700;
         }
 
         .footer {
             background: linear-gradient(180deg, #c9a227, #a8841f);
-            padding: 20px;
+            padding: 12px;
             text-align: center;
             color: #1e1e1e;
-            font-size: 22px;
-            font-weight: 900;
-            margin-top: 18px;
-            border-radius: 6px;
-            letter-spacing: 1px;
-            width: 100%;
-            clear: both;
+            font-size: 12px;
+            font-weight: 800;
+            margin-top: 10px;
+        }
+
+        .pen-decoration {
+            position: absolute;
+            bottom: 10px;
+            left: -8px;
+            width: 30px;
+            height: 140px;
+            background: linear-gradient(90deg, #0a0a0a 0%, #2a2a2a 25%, #0a0a0a 50%, #2a2a2a 75%, #0a0a0a 100%);
+            border-radius: 3px;
+            transform: rotate(-15deg);
+            z-index: 5;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .pen-decoration::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 16px solid #d4af37;
+        }
+
+        .pen-decoration::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid #d4af37;
+        }
+
+        .pen-ring {
+            position: absolute;
+            bottom: 40px;
+            left: -6px;
+            width: 26px;
+            height: 6px;
+            background: linear-gradient(90deg, #d4af37, #b8941f, #d4af37);
+            border-radius: 3px;
+            transform: rotate(-15deg);
+            z-index: 6;
         }
 
         .watermark {
@@ -543,240 +603,60 @@
             top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 120px;
-            height: 150px;
-            opacity: 0.04;
+            width: 100px;
+            height: 120px;
+            opacity: 0.03;
             pointer-events: none;
             z-index: 1;
-            font-size: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .loading-overlay {
-            display: none;
-            position: fixed;
+        .watermark::before {
+            content: '💧';
+            font-size: 80px;
+            position: absolute;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 99999;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        .loading-overlay.active {
-            display: flex;
-        }
-
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #e94560;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 15px;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .loading-text {
-            color: white;
-            font-size: 1.3rem;
-            font-weight: bold;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .receipt-buttons {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             margin-top: 15px;
             padding: 0 10px 15px;
-            max-width: 210mm;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .receipt-buttons button {
             flex: 1;
-            padding: 18px;
-            font-size: 1.4rem;
-            border-radius: 12px;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: white;
-        }
-
-        .receipt-buttons .btn-pdf {
-            background: linear-gradient(135deg, #28a745, #1e7e34);
-        }
-
-        .receipt-buttons .btn-back {
-            background: linear-gradient(135deg, #6c757d, #495057);
-        }
-
-        .receipt-buttons button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        @media screen and (max-width: 750px) {
-            .receipt-wrapper {
-                width: 100%;
-                padding: 3mm;
-            }
-            .content {
-                padding: 10px 12px;
-            }
-            .main-title {
-                font-size: 28px;
-            }
-            .project-location {
-                font-size: 16px;
-            }
-            .date-line,
-            .time-line {
-                font-size: 15px;
-            }
-            .data-table th,
-            .data-table td {
-                font-size: 16px;
-                padding: 12px 4px;
-            }
-            .summary-box .label {
-                font-size: 14px;
-            }
-            .summary-box .value {
-                font-size: 22px;
-            }
-            .contact-left {
-                width: 100px;
-                padding: 10px 6px;
-            }
-            .contact-left svg {
-                width: 70px;
-                height: 70px;
-            }
-            .phone-line {
-                font-size: 16px;
-            }
-            .note-title {
-                font-size: 15px;
-            }
-            .note-text {
-                font-size: 14px;
-            }
-            .footer {
-                font-size: 16px;
-                padding: 14px;
-            }
-            .top-banner {
-                height: 75px;
-            }
-            .center-logo {
-                width: 50px;
-                height: 50px;
-                font-size: 22px;
-            }
-            .receipt-buttons button {
-                font-size: 1.1rem;
-                padding: 14px;
-            }
-            .summary-boxes {
-                flex-direction: column;
-                gap: 8px;
-            }
-            .contact-section {
-                flex-direction: column;
-            }
-            .contact-left {
-                width: 100%;
-                border-left: none;
-                border-bottom: 3px solid #b8941f;
-                flex-direction: row;
-                padding: 10px;
-                gap: 15px;
-            }
-            .contact-left svg {
-                width: 60px;
-                height: 60px;
-                margin: 0;
-            }
-            .top-left-logo svg,
-            .top-right-logo svg {
-                width: 40px;
-                height: 40px;
-            }
-            .top-left-logo p,
-            .top-right-logo p {
-                font-size: 8px;
-            }
-            .record-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            .record-info span {
-                display: block;
-                margin: 3px 0;
-            }
         }
 
         @media print {
-            body {
-                background: white;
-            }
-            #controlSection {
-                display: none !important;
-            }
-            #receiptSection {
-                display: block !important;
-                position: static;
-            }
-            .receipt-buttons {
-                display: none !important;
-            }
-            .receipt-wrapper {
-                padding: 0;
-                width: 100%;
-            }
-            .loading-overlay {
-                display: none !important;
-            }
+            body { background: white; }
+            #controlSection { display: none !important; }
+            #receiptSection { display: block !important; position: static; }
+            .receipt-buttons { display: none !important; }
         }
     </style>
 </head>
 <body>
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">⏳ جاري تجهيز ملف PDF...</div>
-    </div>
-
+    <!-- ===== قسم لوحة التحكم ===== -->
     <div id="controlSection">
         <div class="container">
             <h1>💧 لوحة تحكم فاتورة المياه</h1>
+
             <div class="panel">
                 <div class="success-msg" id="successMsg">✅ تم إرسال البيانات بنجاح!</div>
+
                 <div class="form-group">
                     <label>👤 اسم المستفيد:</label>
                     <input type="text" id="name" placeholder="أدخل اسم المستفيد...">
                 </div>
+
                 <div class="form-group">
                     <label>📅 التاريخ:</label>
                     <input type="date" id="date">
                 </div>
+
                 <div class="form-group">
                     <label>📆 اليوم:</label>
                     <select id="day">
@@ -790,6 +670,7 @@
                         <option value="الأربعاء">الأربعاء</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label>🔢 عدد الردود:</label>
                     <select id="responses" onchange="calculateTotal()">
@@ -806,6 +687,7 @@
                         <option value="10">10</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label>💰 سعر الرد (ريال):</label>
                     <select id="price" onchange="calculateTotal()">
@@ -818,14 +700,17 @@
                         <option value="60">60 ريال</option>
                     </select>
                 </div>
+
                 <div class="calculation-box" id="calcBox">
                     <div class="calc-label">💡 الحساب التلقائي:</div>
                     <div class="calc-result" id="calcResult">0 ريال</div>
                     <div class="calc-detail" id="calcDetail"></div>
                 </div>
+
                 <button class="btn-submit" onclick="sendData()">📤 إرسال البيانات</button>
                 <button class="btn-view" onclick="showReceipt()">🧾 عرض الفاتورة</button>
             </div>
+
             <div class="records-section">
                 <h2>📋 سجلات الفواتير</h2>
                 <div id="recordsList">
@@ -835,50 +720,47 @@
         </div>
     </div>
 
+    <!-- ===== قسم الفاتورة ===== -->
     <div id="receiptSection">
         <div class="receipt-wrapper" id="receipt">
             <div class="receipt-inner">
                 <div class="top-banner">
+                    <div class="flower-left">
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                    </div>
+                    <div class="flower-right">
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                        <span class="blue-flower"></span>
+                    </div>
+                    <div class="center-logo">
+                        <div class="center-logo-inner"></div>
+                    </div>
+                </div>
 
-                    <!-- الشعار الأيسر: خدمة عملاء بتصميم احترافي -->
-                    <div class="top-left-logo">
-                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="5" y="5" width="90" height="90" rx="15" fill="#1a4a6e" stroke="#d4af37" stroke-width="3"/>
-                            <rect x="20" y="20" width="60" height="60" rx="8" fill="white" opacity="0.12"/>
-                            <path d="M35 30 L65 30 L65 45 L35 45 Z" fill="white" opacity="0.2"/>
-                            <text x="50" y="44" text-anchor="middle" font-size="16" fill="white" font-weight="bold">خدمة</text>
-                            <text x="50" y="64" text-anchor="middle" font-size="14" fill="#d4af37" font-weight="bold">عملاء</text>
-                            <circle cx="50" cy="22" r="7" fill="#d4af37" opacity="0.25"/>
-                            <circle cx="50" cy="22" r="3.5" fill="#d4af37"/>
-                            <path d="M30 78 L70 78" stroke="#d4af37" stroke-width="2" opacity="0.5"/>
-                            <path d="M25 15 L35 15" stroke="#4a8fc5" stroke-width="2" opacity="0.3"/>
-                            <path d="M65 15 L75 15" stroke="#4a8fc5" stroke-width="2" opacity="0.3"/>
-                        </svg>
+                <div class="content">
+                    <div class="left-shield">
+                        <div class="shield-icon">
+                            <img src="https://i.ibb.co/RkfmfFjF/Screenshot.png" alt="شعار خدمة عملاء">
+                        </div>
                         <p>خدمة عملاء<br>لتعبئة السيارات</p>
                     </div>
 
-                    <!-- الشعار الأيمن: تعبئة مياه بتصميم احترافي -->
-                    <div class="top-right-logo">
-                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="50" cy="50" r="45" fill="#4a90d9" stroke="#2a5a8a" stroke-width="2"/>
-                            <path d="M50 15 C50 15 25 50 25 65 C25 78 35 88 50 88 C65 88 75 78 75 65 C75 50 50 15 50 15Z" fill="white" opacity="0.25"/>
-                            <text x="50" y="58" text-anchor="middle" font-size="32" fill="white">💧</text>
-                            <circle cx="50" cy="35" r="5" fill="white" opacity="0.15"/>
-                            <path d="M35 80 L65 80" stroke="white" stroke-width="2" opacity="0.2"/>
-                            <circle cx="50" cy="50" r="35" stroke="white" stroke-width="1" opacity="0.1" fill="none"/>
-                        </svg>
-                        <p>تعبئة مياه</p>
-                    </div>
+                    <div class="faucet">🚰</div>
 
-                    <div class="center-logo">💧</div>
-                </div>
-                <div class="content">
                     <div class="header-info">
                         <div class="main-title">إيصال تعبئة مياه</div>
                         <div class="project-location">مكان المشروع: خط المزرق الصيابه</div>
                         <div class="date-line" id="issueDate">تاريخ الإصدار: --</div>
                         <div class="time-line" id="issueTime">الوقت: --</div>
                     </div>
+
                     <table class="data-table">
                         <thead>
                             <tr>
@@ -890,11 +772,10 @@
                             </tr>
                         </thead>
                         <tbody id="receiptTableBody">
-                            <tr>
-                                <td colspan="5" style="font-size:24px;padding:25px;font-weight:900;">لا توجد سجلات</td>
-                            </tr>
+                            <tr><td colspan="5">لا توجد سجلات</td></tr>
                         </tbody>
                     </table>
+
                     <div class="summary-boxes">
                         <div class="summary-box">
                             <span class="corner-dot corner-top"></span>
@@ -915,20 +796,14 @@
                             <span class="value" id="totalAmount">0 ريال</span>
                         </div>
                     </div>
+
                     <div class="contact-section">
                         <div class="contact-left">
-                            <!-- شعار الحريصي بتصميم احترافي -->
-                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="50" r="45" fill="#d4af37" stroke="#8b6914" stroke-width="2.5"/>
-                                <circle cx="50" cy="50" r="40" fill="white" opacity="0.15"/>
-                                <text x="50" y="42" text-anchor="middle" font-size="17" fill="#1a1a2e" font-weight="900">الحريصي</text>
-                                <text x="50" y="60" text-anchor="middle" font-size="11" fill="#1a1a2e" font-weight="700">للمياه</text>
-                                <path d="M30 72 L70 72" stroke="#8b6914" stroke-width="2"/>
-                                <circle cx="50" cy="28" r="6" fill="#1a4a6e" opacity="0.15"/>
-                                <circle cx="50" cy="28" r="3" fill="#1a4a6e"/>
-                                <path d="M40 80 Q50 88 60 80" stroke="#8b6914" stroke-width="2" fill="none"/>
-                                <circle cx="50" cy="50" r="45" stroke="#d4af37" stroke-width="1" opacity="0.3" fill="none"/>
-                            </svg>
+                            <div class="al-harisi-logo">
+                                <img src="https://i.ibb.co/j9rVs5LL/Screenshot.png" alt="شعار الحريصي">
+                            </div>
+                            <div class="name">الحريصي</div>
+                            <div class="line"></div>
                         </div>
                         <div class="contact-right">
                             <div class="phone-line">☎️ للتواصل تليفون: 0537024664</div>
@@ -939,13 +814,18 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="footer">
                         This receipt is intended for proof of payment only.
                     </div>
-                    <div class="watermark">💧</div>
+
+                    <div class="pen-decoration"></div>
+                    <div class="pen-ring"></div>
+                    <div class="watermark"></div>
                 </div>
             </div>
         </div>
+
         <div class="receipt-buttons">
             <button class="btn-pdf" onclick="downloadPDF()">📄 تحميل PDF</button>
             <button class="btn-back" onclick="hideReceipt()">🔙 رجوع</button>
@@ -987,12 +867,7 @@
             const totalAmount = responses * price;
             const record = {
                 id: Date.now(),
-                name,
-                date,
-                day,
-                responses,
-                pricePerResponse: price,
-                amount: totalAmount,
+                name, date, day, responses, pricePerResponse: price, amount: totalAmount,
                 timestamp: new Date().toLocaleString('ar-SA')
             };
 
@@ -1023,21 +898,20 @@
             }
 
             list.innerHTML = records.map(r => `
-                    <div class="record-item">
-                        <div class="record-info">
-                            <strong>👤 ${r.name}</strong>
-                            <span>📅 ${r.date}</span>
-                            <span>📆 ${r.day}</span>
-                            <span>🔢 ${r.responses} ردود</span>
-                            <span>💰 ${r.amount} ريال</span>
-                        </div>
-                        <button class="btn-delete" onclick="deleteRecord(${r.id})">🗑️ حذف</button>
+                <div class="record-item">
+                    <div class="record-info">
+                        <strong>${r.name}</strong><br>
+                        <span>📅 ${r.date}</span>
+                        <span>🔢 ${r.responses} رد</span>
+                        <span>💰 ${r.amount} ريال</span>
                     </div>
-                `).join('');
+                    <button class="btn-delete" onclick="deleteRecord(${r.id})">🗑️ حذف</button>
+                </div>
+            `).join('');
         }
 
         function deleteRecord(id) {
-            if (!confirm('هل أنت متأكد من الحذف؟')) return;
+            if (!confirm('هل أنت متأكد؟')) return;
             let records = JSON.parse(localStorage.getItem('waterReceipts') || '[]');
             records = records.filter(r => r.id !== id);
             localStorage.setItem('waterReceipts', JSON.stringify(records));
@@ -1048,7 +922,7 @@
             updateReceiptData();
             document.getElementById('controlSection').style.display = 'none';
             document.getElementById('receiptSection').style.display = 'block';
-            document.body.style.background = '#3d2b1a';
+            document.body.style.background = '#5c3a1e';
             window.scrollTo(0, 0);
         }
 
@@ -1063,27 +937,21 @@
             const tbody = document.getElementById('receiptTableBody');
 
             const now = new Date();
-            document.getElementById('issueTime').textContent = 'الوقت: ' + now.toLocaleTimeString('ar-SA', { hour: '2-digit',
-                    minute: '2-digit' });
-            document.getElementById('issueDate').textContent = 'تاريخ الإصدار: ' + now.toLocaleDateString('ar-SA', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
+            document.getElementById('issueTime').textContent = 'الوقت: ' + now.toLocaleTimeString('ar-SA', {hour:'2-digit', minute:'2-digit'});
+            document.getElementById('issueDate').textContent = 'تاريخ الإصدار: ' + now.toLocaleDateString('ar-SA', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
 
             if (records.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" style="font-size:24px;padding:25px;font-weight:900;">لا توجد سجلات</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="5">لا توجد سجلات</td></tr>';
             } else {
                 tbody.innerHTML = records.map(r => `
-                        <tr>
-                            <td style="font-size:24px;font-weight:900;padding:18px 12px;">${r.name}</td>
-                            <td style="font-size:24px;font-weight:900;padding:18px 12px;">${r.date}</td>
-                            <td style="font-size:24px;font-weight:900;padding:18px 12px;">${r.responses}</td>
-                            <td style="font-size:24px;font-weight:900;padding:18px 12px;">${r.amount} ريال</td>
-                            <td style="font-size:24px;font-weight:900;padding:18px 12px;">${r.day}</td>
-                        </tr>
-                    `).join('');
+                    <tr>
+                        <td>${r.name}</td>
+                        <td>${r.date}</td>
+                        <td>${r.responses}</td>
+                        <td>${r.amount} ريال</td>
+                        <td>${r.day}</td>
+                    </tr>
+                `).join('');
             }
 
             const uniqueDates = new Set(records.map(r => r.date));
@@ -1092,47 +960,35 @@
             document.getElementById('totalAmount').textContent = records.reduce((s, r) => s + r.amount, 0) + ' ريال';
         }
 
-        async function downloadPDF() {
-            const loadingOverlay = document.getElementById('loadingOverlay');
+        function downloadPDF() {
+            const element = document.getElementById('receipt');
             const buttons = document.querySelector('.receipt-buttons');
-
-            loadingOverlay.classList.add('active');
             buttons.style.display = 'none';
 
-            try {
-                const element = document.getElementById('receipt');
+            const opt = {
+                margin: 0,
+                filename: 'فاتورة-المياه-' + new Date().toLocaleDateString('ar-SA').replace(/\//g, '-') + '.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { 
+                    scale: 3,          // ← تكبير الدقة 3 أضعاف (من 800 إلى 2400 بكسل عرضاً)
+                    useCORS: true,
+                    logging: false,
+                    width: 800,        // عرض الالتقاط الأساسي
+                    height: element.scrollHeight // الالتقاط كامل الطول
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4',      // حجم الورقة يبقى A4
+                    orientation: 'portrait' 
+                }
+            };
 
-                const opt = {
-                    margin: [0, 0, 0, 0],
-                    filename: 'فاتورة-المياه-' + new Date().toLocaleDateString('ar-SA').replace(/\//g, '-') + '.pdf',
-                    image: { type: 'jpeg', quality: 1.0 },
-                    html2canvas: {
-                        scale: 3,
-                        useCORS: true,
-                        allowTaint: true,
-                        scrollY: 0,
-                        scrollX: 0,
-                        windowWidth: element.scrollWidth,
-                        windowHeight: element.scrollHeight,
-                        logging: false,
-                    },
-                    jsPDF: {
-                        unit: 'mm',
-                        format: 'a4',
-                        orientation: 'portrait'
-                    },
-                    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-                };
-
-                await html2pdf().set(opt).from(element).save();
-
-            } catch (err) {
-                console.error('خطأ في تحميل PDF:', err);
-                alert('⚠️ حدث خطأ أثناء تحميل PDF: ' + err.message);
-            } finally {
-                loadingOverlay.classList.remove('active');
+            html2pdf().set(opt).from(element).save().then(() => {
                 buttons.style.display = 'flex';
-            }
+            }).catch(() => {
+                buttons.style.display = 'flex';
+                alert('حدث خطأ أثناء تحميل PDF');
+            });
         }
 
         loadRecords();
